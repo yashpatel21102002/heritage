@@ -1,0 +1,81 @@
+import express from 'express'
+import Monument from "../models/Monument.js";
+
+const router = express.Router();
+
+// CREATE
+router.post("/monument",async(req,res)=>{
+    const newMonument = new Monument(req.body);
+    try{
+        const savedMonument = await newMonument.save()
+        res.status(201).json(savedMonument)
+
+    }catch(e){
+        res.status(500).json(e);
+    }
+})
+
+// Delete;
+
+router.delete("/monument/:id",async(req,res)=>{
+    const id=req.params.id;
+
+    try{
+        await Monument.findByIdAndDelete(id);
+        res.status(200).json("Monument has been deleted!!")
+
+    }catch(e){
+        res.status(500).json(e);
+    }
+})
+
+//Get All Monuments
+
+router.get("/monuments",async(req,res)=>{
+    
+
+    try{
+        const allMonuments=await Monument.find();
+        res.status(200).json(allMonuments);
+
+
+    }catch(e){
+        res.status(500).json(e);
+    }
+})
+
+//Get Element by Id
+
+router.get("/monument/:id",async(req,res)=>{
+    
+    const id=req.params.id;
+    try{
+        const oneMonument=await Monument.findById(id);
+        res.status(200).json(oneMonument);
+
+
+    }catch(e){
+        res.status(500).json(e);
+    }
+})
+
+//Update Monument by id
+
+router.put("/monument/:id",async(req,res)=>{
+    const id=req.params.id;
+
+    try{
+
+        const tobeUpdatedMonument=await Monument.findByIdAndUpdate(id,{$set:req.body},{new:true});
+        res.status(200).json(tobeUpdatedMonument);
+
+
+    }catch(e){
+        res.status(500).json(e);
+    }
+})
+
+
+
+
+export default router;
