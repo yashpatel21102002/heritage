@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose';
 import monumentRouter from './routes/monuments.js'
+import userRouter from './routes/auth.js'
 
 
 const app = express();
@@ -15,10 +16,15 @@ app.use(cors());
 app.use(express.json());
 dotenv.config();
 app.use("/api",monumentRouter);
+app.use("/api",userRouter)
 
 
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  
+})
 .then(()=>{
     console.log("connected to mongoDB!")
 })
