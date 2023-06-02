@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import YMonument from './YMonument'
 
 const Middle = () => {
   return (
@@ -29,6 +30,52 @@ const Middle = () => {
                 </Result_Container1>
                 <Result_Container2>
                     <Span><b>1</b> result found</Span>
+                    <Cards>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+                        <YMonument/>
+
+                    </Cards>
 
 
                 </Result_Container2>
@@ -178,7 +225,7 @@ const Result_Container2 = styled.div`
     border-radius: 0 0 25px 0;
     padding-top:10px;
     padding-left: 10px;
-    
+    /* z-index:55; */
     
 
 `
@@ -190,6 +237,43 @@ const Wrapper2 = styled.div`
     flex: 2;
     background-color: green;
     border-radius: 25px;
+
+
+`
+
+const Cards = styled.div`
+    margin-top:15px;
+    margin-right:10px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    height: 500px;
+    overflow:scroll;
+    overflow-x: hidden;
+
+    
+    ::-webkit-scrollbar{
+        width: 6px;
+     
+        
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #eeebeb;
+        border-radius: 25px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #dd12dd76;
+        border-radius: 25px;
+        
+       
+    }
+
+    
+
+
 
 
 `
