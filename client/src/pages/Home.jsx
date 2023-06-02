@@ -1,10 +1,14 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 import styled from 'styled-components'
+import Middle from '../components/Middle'
 
 const Home = () => {
   return (
     <Container>
-      Home
+      <Navbar/>
+      <Middle/>
+      
     </Container>
   )
 }
@@ -14,8 +18,8 @@ export default Home
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: red;
+  background-image:linear-gradient(#5C469C,#D4ADFC);
+
+
 
 `
-
-
