@@ -1,9 +1,9 @@
 import React from 'react'
-import Home from './pages/Home'
+import Monuments from "./pages/Monuments"
 
 const App = () => {
   return (
-    <div><Home/></div>
+    <div><Monuments/></div>
   )
 }
 
