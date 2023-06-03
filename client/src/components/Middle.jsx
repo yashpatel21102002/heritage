@@ -244,6 +244,7 @@ const Wrapper2 = styled.div`
 const Cards = styled.div`
     margin-top:15px;
     margin-right:10px;
+    /* margin-left: 10px; */
     display:flex;
     flex-wrap:wrap;
     gap:15px;
