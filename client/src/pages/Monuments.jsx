@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import { GiIndianPalace } from "react-icons/gi";
 import { BsSearch } from "react-icons/bs";
+import SMonuments from '../components/SMonuments';
 
 const Monuments = () => {
   return (
@@ -72,6 +73,8 @@ const Monuments = () => {
           </Filter>
         </Right2>
       </Navbar2>
+
+      <SMonuments/>
     </Container>
   );
 }
@@ -79,16 +82,16 @@ const Monuments = () => {
 export default Monuments
 
 const Container = styled.div`
-  position: relative;
+  /* position: relative; */
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   background-image: linear-gradient(#5c469c, #d4adfc);
 `;
 const Navbar = styled.div`
   /* Rectangle 8 */
 
-  position: absolute;
+  /* position: absolute; */
   width: 100vw;
   height: 50px;
   left: 0px;
@@ -96,6 +99,7 @@ const Navbar = styled.div`
   display: flex;
   align-items: center;
   background-color: #d9d9d9;
+  position: sticky;
 `;
 const Left = styled.div`
   display: flex;
@@ -153,14 +157,13 @@ const Searchlogo = styled(BsSearch)`
  margin-left:0px;
 `;
 const Navbar2 = styled.div`
-
-  position: absolute;
   width: 100vw;
   height: 71px;
   left: 0px;
   top: 50px;
   background: #ffffff;
   display: flex;
+  position: sticky;
   /* align-items: center; */
 `;
 const Left2 = styled.div`
