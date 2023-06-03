@@ -84,9 +84,9 @@ export default Monuments
 const Container = styled.div`
   /* position: relative; */
   width: 100vw;
-  height: 100%;
-
+  height: auto;
   background-image: linear-gradient(#5c469c, #d4adfc);
+  
 `;
 const Navbar = styled.div`
   /* Rectangle 8 */
@@ -100,6 +100,8 @@ const Navbar = styled.div`
   align-items: center;
   background-color: #d9d9d9;
   position: sticky;
+  z-index: 999;
+  
 `;
 const Left = styled.div`
   display: flex;
@@ -109,7 +111,7 @@ const Left = styled.div`
 const Logo = styled(GiIndianPalace)`
   width: 10%;
   height: 50px;
-  margin-left:20%;
+  margin-left:15%;
   display:flex;
 `;
 const Desc = styled.text`
@@ -164,6 +166,7 @@ const Navbar2 = styled.div`
   background: #ffffff;
   display: flex;
   position: sticky;
+  z-index: 999;
   /* align-items: center; */
 `;
 const Left2 = styled.div`
@@ -174,6 +177,7 @@ display: flex;
   flex: 1;
   justify-content: space-around;
   align-items: center;
+  /* margin-left: 20px; */
 `;
 const Right2 = styled.div`
   display: flex;
