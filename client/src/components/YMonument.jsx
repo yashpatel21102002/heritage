@@ -17,7 +17,7 @@ const YMonument = () => {
 export default YMonument
 
 const Container = styled.div`
-    width: 140px;
+    width: 7vw;
     height: 160px;
     display: flex;
     flex-direction: column;

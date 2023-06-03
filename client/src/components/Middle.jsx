@@ -247,7 +247,8 @@ const Cards = styled.div`
     display:flex;
     flex-wrap:wrap;
     gap:15px;
-    height: 500px;
+    /* height: 500px; */
+    height:58vh;
     overflow:scroll;
     overflow-x: hidden;
 
