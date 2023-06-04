@@ -1,8 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import YMonument from './YMonument'
+import Monuments from '../data'
 
 const Middle = () => {
+    const [monuments,setMonuments] = useState(Monuments);
+    const [filterMonument, setFilterMonument] = useState([]);
+    const [filters,setFilters] = useState({});
+    
+    useEffect(()=>{
+
+        setFilterMonument(monuments.filter((item)=>Object.entries(filters).every(([key,value])=>item[key].includes(value))))
+            
+            
+          
+        
+        
+    },[filters,monuments])
+   
+
+    const handleRegion = (e) =>{
+        let value = e.target.value;
+        setFilters({
+            [e.target.name]: value,
+        })
+        
+    }
   return (
     <Container>
         <Wrapper1>
@@ -18,12 +41,12 @@ const Middle = () => {
             </SearchArea>
             <Result>
                 <Result_Container1>
-                    <Nav>All</Nav>
-                    <Nav>East</Nav>
-                    <Nav>West</Nav>
-                    <Nav>North</Nav>
-                    <Nav>South</Nav>
-                    <Nav>Central</Nav>
+                    <Nav name='region' onClick={handleRegion} value="">All</Nav>
+                    <Nav name='region' onClick={handleRegion} value="east">East</Nav>
+                    <Nav name="region" onClick={handleRegion} value="west">West</Nav>
+                    <Nav name="region" onClick={handleRegion} value="north">North</Nav>
+                    <Nav name='region' onClick={handleRegion} value="south">South</Nav>
+                    <Nav name='region' onClick={handleRegion} value="central">Central</Nav>
                     
 
 
@@ -31,49 +54,12 @@ const Middle = () => {
                 <Result_Container2>
                     <Span><b>1</b> result found</Span>
                     <Cards>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
-                        <YMonument/>
+                        {filterMonument.map((item)=>(
+
+                            <YMonument item={item}/>
+                        ))}
+                        
+                  
 
                     </Cards>
 
@@ -242,14 +228,18 @@ const Wrapper2 = styled.div`
 `
 
 const Cards = styled.div`
+    /* margin-bottom:15px;
+     */
     margin-top:15px;
+    padding-bottom: 8px;
     margin-right:10px;
     /* margin-left: 10px; */
     display:flex;
     flex-wrap:wrap;
     gap:15px;
+
     /* height: 500px; */
-    height:58vh;
+    max-height:58vh;
     overflow:scroll;
     overflow-x: hidden;
 

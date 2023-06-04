@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const YMonument = () => {
+const YMonument = ({item}) => {
   return (
     <Container>
-        <Image src='https://www.holidify.com/blog/wp-content/uploads/2014/06/Taj-Mahal.jpg'/>
+        <Image src={`${item.img[0]}`}/>
         <Info>
-            <Title>fkljqojf ooqnagoj ojisgopjpaoj oopgnopango</Title>
-            <Span>havwli ame jaofj aosjofj oajsfoj joajfoj ojnaifiIFIH </Span>
+            <Title>{item.name}</Title>
+            <Span>{item.city}, {item.state}</Span>
 
         </Info>
     </Container>
@@ -20,6 +20,7 @@ const Container = styled.div`
     cursor: pointer;
     width: 7vw;
     height: auto;
+    min-height: 15vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 4px 0;
