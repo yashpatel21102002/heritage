@@ -1,21 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import YMonument from './YMonument'
-import Monuments from '../data'
+import axios from 'axios'
+import YMiddleRight from './YMiddleRight'
 
 const Middle = () => {
-    const [monuments,setMonuments] = useState(Monuments);
+    const [monuments,setMonuments] = useState([]);
     const [filterMonument, setFilterMonument] = useState([]);
     const [filters,setFilters] = useState({});
+    const [count,setCount] = useState(0)
+
+
+    useEffect(()=>{
+        const getMonuments = async()=>{
+            try{
+                const res = await axios.get("http://localhost:8000/api/monuments")
+                setMonuments(res.data);
+    
+    
+            }catch(e){
+                // res.status(400).json("i am error",e)
+                console.log("i am error",e)
+            }
+            
+        }
+    
+        getMonuments();
+
+    })
+     
+
+    
     
     useEffect(()=>{
 
         setFilterMonument(monuments.filter((item)=>Object.entries(filters).every(([key,value])=>item[key].includes(value))))
+        
             
             
           
         
         
+        setCount(filterMonument.length)
     },[filters,monuments])
    
 
@@ -52,7 +78,7 @@ const Middle = () => {
 
                 </Result_Container1>
                 <Result_Container2>
-                    <Span><b>1</b> result found</Span>
+                    <Span><b>{count}</b> result found</Span>
                     <Cards>
                         {filterMonument.map((item)=>(
 
@@ -75,6 +101,10 @@ const Middle = () => {
 
         </Wrapper1>
         <Wrapper2>
+            <Header3>
+                Top Monuments
+            </Header3>
+            <YMiddleRight/>
 
 
         </Wrapper2>
@@ -221,8 +251,16 @@ const Result_Container2 = styled.div`
 
 const Wrapper2 = styled.div`
     flex: 2;
-    background-color: green;
+    
+    /* padding: 10px; */
     border-radius: 25px;
+
+
+`
+
+const Header3 = styled.h1`
+    font-weight: light;
+    color: white;
 
 
 `
