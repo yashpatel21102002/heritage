@@ -52,7 +52,7 @@ const Infodiv = styled.div`
 
 const InfoTitle = styled.h1`
 font-size: 25px;
-font-weight: 150;
+font-weight: 500;
 margin-top: 10px;
 text-overflow: ellipsis;
 overflow: hidden;
