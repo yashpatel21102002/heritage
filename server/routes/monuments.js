@@ -1,5 +1,6 @@
-import express from 'express'
+import express, { query } from 'express'
 import Monument from "../models/Monument.js";
+
 
 const router = express.Router();
 
@@ -32,6 +33,7 @@ router.delete("/monument/:id",async(req,res)=>{
 //Get All Monuments
 
 router.get("/monuments",async(req,res)=>{
+    
     
 
     try{
@@ -76,6 +78,34 @@ router.put("/monument/:id",async(req,res)=>{
 })
 
 
+// search monument according to the search term in the search bar
+router.get("/searchMonuments/:searchTerm",async(req,res)=>{
+    const searchTerm = req.params.searchTerm;
+    // console.log(searchTerm);
+    let pipeline = [
+        {
+            $search:{
+              index:"searchMonuments",
+              text:{
+                query:searchTerm,
+                path:["name","city","state"]
+              }
+            }
+          }
+        
+
+    ]
+    try{
+        const searchedMonuments = await Monument.aggregate(pipeline);
+    res.status(200).json(searchedMonuments)
+
+    }catch(e){
+        res.status(500).json(e.message)
+    }
+
+    
+
+})
 
 
 export default router;

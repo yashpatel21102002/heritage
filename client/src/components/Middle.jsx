@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import YMonument from './YMonument'
 import axios from 'axios'
@@ -6,9 +6,12 @@ import YMiddleRight from './YMiddleRight'
 
 const Middle = () => {
     const [monuments,setMonuments] = useState([]);
+    const [searchMonuments,setSearchMonuments] = useState([])
     const [filterMonument, setFilterMonument] = useState([]);
     const [filters,setFilters] = useState({});
-    const [count,setCount] = useState(0)
+ 
+    let [isSearched , setIsSearched] = useState(false) 
+    const [searchTerm , setSearchTerm] = useState("")
 
 
     useEffect(()=>{
@@ -27,31 +30,99 @@ const Middle = () => {
     
         getMonuments();
 
-    })
+    },[])
+    
+
+
+    
      
 
     
     
     useEffect(()=>{
+        
+             // Your useEffect code here to be run on update
+             
+            
+           
+            
+            setFilterMonument(monuments.filter((item)=>Object.entries(filters).every(([key,value])=>item[key].includes(value))))
+          
+          
+           
+            
+         
+        
 
-        setFilterMonument(monuments.filter((item)=>Object.entries(filters).every(([key,value])=>item[key].includes(value))))
+      
+            
+       
         
             
             
           
         
         
-        setCount(filterMonument.length)
-    },[filters,monuments])
+    },[filters,monuments,isSearched])
+
+    useEffect(()=>{
+        if(isSearched){
+            const getMonuments = async()=>{
+                try{
+                    const res = await axios.get(`http://localhost:8000/api/searchMonuments/${searchTerm}`)
+                    setSearchMonuments(res.data);
+        
+        
+                }catch(e){
+                    // res.status(400).json("i am error",e)
+                    console.log("i am error",e)
+                }
+                
+            }
+        
+            getMonuments();
+ 
+
+
+
+
+        }
+
+        
+
+    },[isSearched,searchTerm])
+
+    
+
+    
    
 
     const handleRegion = (e) =>{
+        setIsSearched(false)
+        setSearchTerm("")
         let value = e.target.value;
         setFilters({
             [e.target.name]: value,
         })
+        setSearchMonuments([]);
         
     }
+
+
+
+    const handleSearch = (e) =>{
+        setIsSearched(true);
+        setIsSearched(false);
+        setIsSearched(true);
+        
+
+        
+        // console.log(searchTerm,isSearched)
+
+        
+    }
+   
+
   return (
     <Container>
         <Wrapper1>
@@ -60,8 +131,12 @@ const Middle = () => {
                     Search for Monument, City or State
                 </Span>
                 <Box>
-                    <Input placeholder='Ahmedabad'/>
-                    <Button>Search</Button>
+                    <Input placeholder='Ahmedabad' onChange=
+                        {(e)=>{setSearchTerm(e.target.value);
+                            // setIsSearched(true)
+                        }
+                        } value={searchTerm}/>
+                    <Button onClick={handleSearch}>Search</Button>
                     <Button>Explore</Button>
                 </Box>
             </SearchArea>
@@ -78,12 +153,23 @@ const Middle = () => {
 
                 </Result_Container1>
                 <Result_Container2>
-                    <Span><b>{count}</b> result found</Span>
+                    <Span><b>0</b> result found</Span>
                     <Cards>
-                        {filterMonument.map((item)=>(
+                        {   
 
-                            <YMonument item={item}/>
-                        ))}
+                                !isSearched ?
+                                filterMonument.map((item)=>
+                                (<YMonument item={item} />)
+                                )
+                             :
+                               searchMonuments.map((item)=>(
+                                (<YMonument item={item}/>)
+                                ))
+                                
+                        
+                            
+                        }
+                        
                         
                   
 
