@@ -5,9 +5,7 @@ const Monument = ({item}) => {
   return (
     <Container>
       <Imgdiv src={item.img[0]} />
-
       <Infodiv>
-        
         <InfoTitle>{ item.name}</InfoTitle>
         <InfoCity>{ item.city}</InfoCity>
         <Price>$ {item.price[0].adult_price} <InfoCity style={{color:"black",fontSize:"16px"}}>per adult</InfoCity></Price>
@@ -27,7 +25,7 @@ const Container = styled.div`
   box-shadow: 0 0 10px 0;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     cursor: pointer;
   }
 `;
@@ -76,6 +74,5 @@ const Price = styled.text`
   font-size: 25px;
   font-weight: 500;
 `;
-
 
 export default Monument

@@ -31,14 +31,45 @@ router.delete("/monument/:id",async(req,res)=>{
 
 //Get All Monuments
 
-router.get("/monuments",async(req,res)=>{
+router.get("/monuments", async (req, res) => {
     
+    const searchType = req.query.searchType;
+    const searchSrc = req.query.searchSrc;
 
-    try{
-        const allMonuments=await Monument.find();
-        res.status(200).json(allMonuments);
+    try {
 
+        let outputMonument;
+        
+        if (searchType==='REGION') {
+            outputMonument = await Monument.find({
+                region: {
+                    $in:[searchSrc]
+                }
+            })
+        }
 
+        else if (searchType === 'STATE') {
+            outputMonument = await Monument.find({
+                state: {
+                    $in:[searchSrc]
+                }
+            })
+        }
+
+        else if (searchType === 'CITY') {
+            outputMonument = await Monument.find({
+                city: {
+                    $in:[searchSrc]
+                }
+            })
+        }
+
+        else {
+            outputMonument = await Monument.find();
+        }
+
+        res.status(200).json(outputMonument);
+        
     }catch(e){
         res.status(500).json(e);
     }
