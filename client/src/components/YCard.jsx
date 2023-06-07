@@ -14,13 +14,14 @@ const YCard = ({item}) => {
             </Name>
             <Loc>
                 <Span>
-                    {item.city}, { item.state}
+                    {item.city},
 
                 </Span>
+                <Span>
+                    {item.state}
+                </Span>
             </Loc>
-            <Price>
-                ${item.price[0].adult_price}
-            </Price>
+           
         </Infodv>
     </Container>
   )
@@ -29,7 +30,7 @@ const YCard = ({item}) => {
 const Container  = styled.div`
     /* background-color: black; */
     position: relative;
-    height: 30vh;
+    height: 31vh;
     max-height: 32vh;
     min-width: 16vw;
     max-width: 16vw;
@@ -68,7 +69,7 @@ const Infodv = styled.div`
 
 const Span = styled.span`
 
-    width: auto;
+    max-width: 16vw;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-left: 5px;
@@ -87,16 +88,11 @@ const Name = styled.h3`
 
 `
 
-const Price =styled.span`
-position: absolute;
-bottom: 1px;
-right: 2px;
 
-    
-`
 
 const Loc = styled.div`
-
+    display: flex;
+    flex-direction: column;
 
 
 
