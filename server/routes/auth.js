@@ -1,8 +1,9 @@
 import express from 'express'
 import User from '../models/User.js'
 //import bycrypt password hashing library
-import bycrypt from 'bcrypt'
+// import bycrypt from 'bycrypt'
 //jwt for authorization
+import bycrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 const router = express.Router()
