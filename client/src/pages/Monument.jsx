@@ -77,15 +77,12 @@ function Single(props) {
       </HeaderInfo>
       </Header>
       
-      <H1>About</H1>
-      <About>
-        {monument?.desc}
-      </About>
-      <H1>Information</H1>
+      
+      <H1 style={{'color':'#eeebeb'}}>Information</H1>
       <Information>
         <Info>
-          <h2>Location</h2>
-          <p>{monument?.city}</p>
+          <h2 >Location</h2>
+          <p>{monument?.location}</p>
         </Info>
 
         <Info>
@@ -110,18 +107,15 @@ function Single(props) {
           <h2>Timing</h2>
           <table>
             <tr>
-              <td>Opening Time:</td>
-              <td>10:00am</td>
+              <td>{monument?.opening}</td>
+              
             </tr>
-            <tr>
-              <td>Closing Time:</td>
-              <td>06:00pm</td>
-            </tr>
+            
           </table>
         </Info>
       </Information>
 
-      <H1>Ticket Information</H1>
+      <H1 style={{'color':'#eeebeb'}}>Ticket Information</H1>
       <TicketInfo>
         <TicketPrice>
           <PriceInfo>
