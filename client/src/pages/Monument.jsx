@@ -2,46 +2,90 @@ import { useState } from "react";
 import styled from "styled-components";
 // import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 // import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Navbar from "../components/Navbar";
 import { BsCart } from "react-icons/bs";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 
 
-function Single() {
+function Single(props) {
   const [booking, setbooking] = useState(0);
+  const [monument,setMonument] = useState();
   function handlebooking() {
     setbooking(booking + 1);
   }
+  
+  
+  const location = useLocation()
+  const id = location.pathname.split("/")[2];
+ 
+
+
+
+  useEffect(()=>{
+
+    const getMonument = async()=>{
+
+      const res  =  await axios.get(`http://localhost:8000/api/monument/${id}`);
+      setMonument(res.data)
+    }
+
+    getMonument();
+    console.log(monument)
+
+
+  })
 
   return (
-    <div>
+    <Container>
       {/* <div>Hello jii</div> */}
       {/* navbar */}
-      <Navbar>Navbar</Navbar>
-      <Image src="https://i.pinimg.com/736x/96/bd/07/96bd07ec9a65b8794636589ed75de151.jpg"></Image>
-      <Navbarmini>
-        <Button>About</Button>
-        <Button>Information</Button>
-        <Button>Ticket Info</Button>
+      <Navbar/>
+      <Header>
 
-        <AddToCart onClick={handlebooking}>Add To Cart</AddToCart>
+
+      <Image src={monument?.img[0]}/>
+      <HeaderInfo>
+        <MonName>
+          {monument?.name}
+        </MonName>
+        <Span>
+          City: {monument?.city}
+        </Span>
+        <Span>
+          State: {monument?.state}
+        </Span>
+        <InfoCon>
+          {monument?.desc}
+        </InfoCon>
+     
+        
+        <Wrapper>
+          <Adding onClick={()=>{setbooking(booking+1)}}>
+            Add to Cart
+          </Adding>
         <Cart>
-          <BsCart />
+          <BsCart/>
           <Booking>{booking}</Booking>
         </Cart>
-      </Navbarmini>
+        </Wrapper>
+          
+     
+
+      </HeaderInfo>
+      </Header>
+      
       <H1>About</H1>
       <About>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-        consequuntur corporis recusandae veniam dignissimos, autem deleniti
-        assumenda modi laudantium minus, quos adipisci eius tempora praesentium
-        quaerat similique, enim laborum sequi ab rerum incidunt molestias!
-        Nihil.
+        {monument?.desc}
       </About>
       <H1>Information</H1>
       <Information>
         <Info>
           <h2>Location</h2>
-          <p>Agra</p>
+          <p>{monument?.city}</p>
         </Info>
 
         <Info>
@@ -82,12 +126,12 @@ function Single() {
         <TicketPrice>
           <PriceInfo>
             <Visitor>Indian Visitor</Visitor>
-            <Price>35$</Price>
+            <Price>{monument?.price[0].adult_price}$</Price>
           </PriceInfo>
 
           <PriceInfo>
             <Visitor>Foreign Visitor</Visitor>
-            <Price>300$</Price>
+            <Price>{monument?.price[1].adult_price}$</Price>
           </PriceInfo>
 
           <PriceInfo>
@@ -113,47 +157,111 @@ function Single() {
           </Ul>
         </Terms>
       </TicketInfo>
-    </div>
+    </Container>
   );
 }
 
 export default Single;
-const Navbar = styled.div`
-  color: aliceblue;
-  text-align: center;
-  background-color: black;
-`;
+
+
+const Container = styled.div`
+display:flex;
+  flex-direction: column;
+  /* margin-top: 2px; */
+  background-image:linear-gradient(#5C469C,#D4ADFC);
+
+
+`
+
+const Header  = styled.div`
+margin-top: 2px;
+  display: flex;
+  /* position: relative; */
+
+
+`
+
+const MonName = styled.h1`
+  margin-top: 5px;
+  margin-left: 5px;
+  color: gold;
+
+`
+const Span = styled.h3`
+  color: #272626;
+  font-weight: bolder;
+  margin-top: 5px;
+  margin-left: 5px;
+
+`
+
 
 const Image = styled.img`
+  flex: 1.5;
+  border-radius: 15px;
+  background-color: black;
   opacity: 0.8;
-  width: 100%;
-  height: 550px;
-  object-fit: cover;
+
+ 
+  
+  
 `;
 
-const Navbarmini = styled.div`
-  width: 100%;
-  height: 60px;
-  background-color: #eeeeee;
+const HeaderInfo = styled.div`
+  
+flex: 1;
+display: flex;
+margin-left: 10px;
+margin-right: 10px;
+flex-direction: column;
+justify-content: center;
+
+
+
+`
+
+const InfoCon = styled.span`
+  margin-top: 5px;
+  margin-left: 5px;
+  color: gold;
+  letter-spacing: 2px;
+  line-height: 20px;
+
+`
+
+const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  flex: 1;
-`;
+  /* justify-content: center; */
+  align-items: center;
+  /* background-color: red; */
+  margin-left: 5px;
+  height: 10%;
+  gap: 10px;
 
-const Button = styled.button`
-  font-weight: lighter;
-  font-size: medium;
-  color: grey;
-  background: none;
+
+`
+
+const Adding = styled.button`
+  
+  padding: 10px 15px;
+  margin-top: 15px;
+  background-color: #eeebeb;
   border: none;
-  padding: 20px 25px;
-  cursor: pointer;
-`;
+  color: #675802;
+  font-size: 18px;
+  font-weight: bolder;
+
+`
+
+
+
+
+
 
 const Cart = styled.div`
-  margin-top: 13px;
-  margin-left: 20px;
-  font-size: 30px;
+  font-size: 28px;
+  
+  
 `;
 
 const Booking = styled.p`
@@ -166,13 +274,7 @@ const Booking = styled.p`
   margin-left: 18px;
 `;
 
-const AddToCart = styled.button`
-  background: none;
-  border-radius: 5px;
-  background-color: tomato;
-  margin: 5px;
-  padding: 5px;
-`;
+
 
 const H1 = styled.h1`
   color: #8fbc8b;

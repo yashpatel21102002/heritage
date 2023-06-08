@@ -1,16 +1,27 @@
 import React from 'react';
+// import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Monument = ({item}) => {
+
+
+  const handleClick = ()=>{
+    window.location.href = `/monument/${item._id}`
+  }
+  
   return (
-    <Container>
-      <Imgdiv src={item.img[0]} />
+    
+  
+    <Container onClick={handleClick}>
+      <Imgdiv src={item ? item.img[0] : ""} />
       <Infodiv>
-        <InfoTitle>{ item.name}</InfoTitle>
-        <InfoCity>{ item.city}</InfoCity>
-        <Price>$ {item.price[0].adult_price} <InfoCity style={{color:"black",fontSize:"16px"}}>per adult</InfoCity></Price>
+        <InfoTitle>{item ? item.name : ""}</InfoTitle>
+        <InfoCity>{item ? item.city:""}</InfoCity>
+        <Price>$ {item ? item.price[0].adult_price : ""} <InfoCity style={{color:"black",fontSize:"16px"}}>per adult</InfoCity></Price>
       </Infodiv>
     </Container>
+    
+
   );
 }
 

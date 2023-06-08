@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import SMonument from './SMonument'
 // import Monuments from '../data'
+
 import axios from'axios'
 
 const SMonuments = ({ serType, serSrc,searchMonuments,searchTerm}) => {
+  
   
   // console.log(serType, serSrc);
   const [monuments, setMonuments] = useState([]);
 
 
   useEffect(() => {
+
     const getMonuments = async () => {
       try {
 
@@ -41,12 +44,15 @@ const SMonuments = ({ serType, serSrc,searchMonuments,searchTerm}) => {
 
   return (
     <Container>
+      
+      
       { 
         searchTerm !== "" ? 
         searchMonuments.map((item)=><SMonument item={item}/>)
         :
         monuments.map((item) => <SMonument item={item} />)
       }
+    
     </Container>
   );
 }
