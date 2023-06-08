@@ -1,16 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Monument = ({item}) => {
   return (
-    <Container>
-      <Imgdiv src={item.img[0]} />
-      <Infodiv>
-        <InfoTitle>{ item.name}</InfoTitle>
-        <InfoCity>{ item.city}</InfoCity>
-        <Price>$ {item.price[0].adult_price} <InfoCity style={{color:"black",fontSize:"16px"}}>per adult</InfoCity></Price>
-      </Infodiv>
-    </Container>
+    <Link to={`/monument/${item._id}`} style={{ textDecoration: "none",color:"black" }}>
+      <Container>
+        <Imgdiv src={item.img[0]} />
+        <Infodiv>
+          <InfoTitle>{item.name}</InfoTitle>
+          <InfoCity>{item.city}</InfoCity>
+          <Price>
+            $ {item.price[0].adult_price}{" "}
+            <InfoCity style={{ color: "black", fontSize: "16px" }}>
+              per adult
+            </InfoCity>
+          </Price>
+        </Infodiv>
+      </Container>
+    </Link>
   );
 }
 

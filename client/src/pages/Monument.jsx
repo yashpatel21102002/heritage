@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 // import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 // import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { BsCart } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import react from "react";
+const something = []
+
 
 const Navbar = styled.div`
   color: aliceblue;
   text-align: center;
   background-color: black;
 `;
-
 const Image = styled.img`
   opacity: 0.8;
   width: 100%;
   height: 550px;
   object-fit: cover;
 `;
-
 const Navbarmini = styled.div`
   width: 100%;
   height: 60px;
@@ -25,7 +28,6 @@ const Navbarmini = styled.div`
   justify-content: center;
   flex: 1;
 `;
-
 const Button = styled.button`
   font-weight: lighter;
   font-size: medium;
@@ -35,13 +37,11 @@ const Button = styled.button`
   padding: 20px 25px;
   cursor: pointer;
 `;
-
 const Cart = styled.div`
   margin-top: 13px;
   margin-left: 20px;
   font-size: 30px;
 `;
-
 const Booking = styled.p`
   padding-left: 10px;
   background-color: maroon;
@@ -51,7 +51,6 @@ const Booking = styled.p`
   font-size: 20px;
   margin-left: 18px;
 `;
-
 const AddToCart = styled.button`
   background: none;
   border-radius: 5px;
@@ -59,47 +58,39 @@ const AddToCart = styled.button`
   margin: 5px;
   padding: 5px;
 `;
-
 const H1 = styled.h1`
   color: #8fbc8b;
   margin: 25px;
 `;
-
 const About = styled.div`
   width: 40%;
   margin: 20px;
   padding: 10px;
 `;
-
 const Information = styled.div`
   width: 40%;
   margin: 20px;
   padding: 10px;
 `;
-
 const Info = styled.div`
   position: relative;
   margin: 10px;
 `;
-
 const TicketInfo = styled.div`
   margin: 20px;
   padding: 10px;
   display: flex;
 `;
-
 const TicketPrice = styled.div`
   width: 50%;
 
   display: flex;
   flex-wrap: wrap;
 `;
-
 const PriceInfo = styled.div`
   margin: 40px;
   padding: 20px;
 `;
-
 const Visitor = styled.div`
   font-weight: 600;
   color: #d10808;
@@ -108,11 +99,9 @@ const Visitor = styled.div`
 const Price = styled.div`
   font-weight: 400;
 `;
-
 const Terms = styled.div`
   width: 50%;
 `;
-
 const H3 = styled.h3`
   font-size: 20px;
 `;
@@ -123,16 +112,48 @@ const Li = styled.li`
 
 function Single() {
   const [booking, setbooking] = useState(0);
+  
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [monument, setMonument] = useState({});
+
+  console.log(id);
+
+    useEffect(() => {
+      const getMonument = async () => {
+        try {
+          const res = await axios.get(
+            "http://localhost:8000/api/monument/" + id
+          );
+          setMonument(res.data);
+          something.push(await monument.img[0])
+          
+          // console.log(res.data);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      getMonument();
+    }, []);
+  
+
+  
+
+  const img = (monument.img);
+  console.log(img);
+  console.log(something)
+
   function handlebooking() {
     setbooking(booking + 1);
   }
 
+  
   return (
     <div>
       {/* <div>Hello jii</div> */}
       {/* navbar */}
       <Navbar>Navbar</Navbar>
-      <Image src="https://i.pinimg.com/736x/96/bd/07/96bd07ec9a65b8794636589ed75de151.jpg"></Image>
+      <Image src={something}/>
       <Navbarmini>
         <Button>About</Button>
         <Button>Information</Button>
@@ -146,11 +167,7 @@ function Single() {
       </Navbarmini>
       <H1>About</H1>
       <About>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-        consequuntur corporis recusandae veniam dignissimos, autem deleniti
-        assumenda modi laudantium minus, quos adipisci eius tempora praesentium
-        quaerat similique, enim laborum sequi ab rerum incidunt molestias!
-        Nihil.
+        {monument.desc}
       </About>
       <H1>Information</H1>
       <Information>
