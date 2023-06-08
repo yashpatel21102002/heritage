@@ -9,9 +9,12 @@ const Monuments = () => {
 
   const [main, setMain] = useState("REGION")  // main means like it is region,state or city
   const [minor, setMinor] = useState("all") // like which region or which state or which city
+  const [searchTerm,setSearchTerm] = useState("")
 
   const [monuments, setMonuments] = useState([]);
+  const [searchMonuments,setSearchMonuments] = useState([])
   useEffect(() => {
+    
     const getMonuments = async () => {
       const res = axios.get("http://localhost:8000/api/monuments");
       setMonuments((await res).data);
@@ -20,9 +23,20 @@ const Monuments = () => {
     getMonuments();
   },[]);
 
+  useEffect(()=>{
+    
+    const getMonuments = async()=>{
+      const res = await axios.get(`http://localhost:8000/api/searchMonuments/${searchTerm}`);
+      setSearchMonuments(res.data)
+      
+    }
+    searchTerm !== "" &&
+    getMonuments()
+  },[searchTerm])
 
 
-  var State = new Array();
+
+  var State = [];
   
   for (let i = 0; i < monuments.length; i++){
     State.push(monuments[i].state);
@@ -47,7 +61,8 @@ const Monuments = () => {
         </Left>
         <Right>
           <SearchContainer>
-            <Search placeholder="Search city , place or monument" />
+            <Search placeholder="Search city , place or monument" onChange={(e)=>
+              {setSearchTerm(e.target.value);setMain("");setMinor("")}}/>
             <Searchlogo />
           </SearchContainer>
         </Right>
@@ -61,6 +76,8 @@ const Monuments = () => {
             onClick={(e) => {
               setMain(e.target.value);
               setMinor(e.target.name);
+              setSearchTerm("");
+              setSearchMonuments([])
             }}
           >
             ALL
@@ -71,6 +88,8 @@ const Monuments = () => {
             onClick={(e) => {
               setMain(e.target.value);
               setMinor(e.target.name);
+              setSearchTerm("");
+              setSearchMonuments([])
             }}
           >
             NORTH
@@ -81,6 +100,8 @@ const Monuments = () => {
             onClick={(e) => {
               setMain(e.target.value);
               setMinor(e.target.name);
+              setSearchTerm("");
+              setSearchMonuments([])
             }}
           >
             SOUTH
@@ -91,6 +112,8 @@ const Monuments = () => {
             onClick={(e) => {
               setMain(e.target.value);
               setMinor(e.target.name);
+              setSearchTerm("");
+              setSearchMonuments([])
             }}
           >
             EAST
@@ -101,6 +124,8 @@ const Monuments = () => {
             onClick={(e) => {
               setMain(e.target.value);
               setMinor(e.target.name);
+              setSearchTerm("");
+              setSearchMonuments([])
             }}
           >
             WEST
@@ -111,6 +136,8 @@ const Monuments = () => {
             onClick={(e) => {
               setMain(e.target.value);
               setMinor(e.target.name);
+              setSearchTerm("");
+              setSearchMonuments([])
             }}
           >
             CENTRAL
@@ -123,6 +150,8 @@ const Monuments = () => {
               onChange={(e) => {
                 setMain("STATE");
                 setMinor(e.currentTarget.value);
+                setSearchTerm("");
+                setSearchMonuments([])
               }}
             >
               <FilterStateOption selected disabled>
@@ -148,7 +177,7 @@ const Monuments = () => {
         </Right2>
       </Navbar2>
 
-      <SMonuments serType={main} serSrc={minor} />
+      <SMonuments serType={main} serSrc={minor} searchMonuments={searchMonuments} searchTerm={searchTerm}/>
     </Container>
   );
 }

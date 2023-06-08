@@ -4,10 +4,11 @@ import SMonument from './SMonument'
 // import Monuments from '../data'
 import axios from'axios'
 
-const SMonuments = ({ serType, serSrc}) => {
+const SMonuments = ({ serType, serSrc,searchMonuments,searchTerm}) => {
   
   // console.log(serType, serSrc);
   const [monuments, setMonuments] = useState([]);
+
 
   useEffect(() => {
     const getMonuments = async () => {
@@ -40,7 +41,10 @@ const SMonuments = ({ serType, serSrc}) => {
 
   return (
     <Container>
-      {
+      { 
+        searchTerm !== "" ? 
+        searchMonuments.map((item)=><SMonument item={item}/>)
+        :
         monuments.map((item) => <SMonument item={item} />)
       }
     </Container>

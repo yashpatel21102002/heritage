@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import YMonument from './YMonument'
 import axios from 'axios'
@@ -112,10 +112,7 @@ const Middle = () => {
 
     const handleSearch = (e) =>{
         setIsSearched(true);
-        setIsSearched(false);
-        setIsSearched(true);
-        
-
+       
         
         // console.log(searchTerm,isSearched)
 
@@ -133,7 +130,7 @@ const Middle = () => {
                 <Box>
                     <Input placeholder='Ahmedabad' onChange=
                         {(e)=>{setSearchTerm(e.target.value);
-                            // setIsSearched(true)
+                            
                         }
                         } value={searchTerm}/>
                     <Button onClick={handleSearch}>Search</Button>

@@ -22,7 +22,7 @@ const Container = styled.div`
   flex-direction: column;
   transition: transform 0.4s;
   /* border:0.5px solid black; */
-  box-shadow: 0 0 10px 0;
+  box-shadow: 0 0 5px 0 white;
 
   &:hover {
     transform: scale(1.1);
