@@ -21,7 +21,14 @@ function Single(props) {
   const location = useLocation()
   const id = location.pathname.split("/")[2];
  
+  const handleSidePanel = ()=>{
+    document.getElementById('sidepanel').style.width = "30vw"
+    
+  }
 
+  const CloseSidePanel = ()=>{
+    document.getElementById('sidepanel').style.width = "0"
+  }
 
 
   useEffect(()=>{
@@ -48,6 +55,16 @@ function Single(props) {
 
       <Image src={monument?.img[0]}/>
       <HeaderInfo>
+        <SideButton onClick={handleSidePanel}>
+          Open
+        </SideButton>
+        <SidePanel id="sidepanel">
+          <CloseButton onClick={CloseSidePanel}>
+            ×Close
+          </CloseButton>
+          {/* from here you can make any container and make one new card named as CartMonument or anything and map it here and make one or two buttons that can lead use to cart and checkout page  */}
+
+        </SidePanel>
         <MonName>
           {monument?.name}
         </MonName>
@@ -181,6 +198,56 @@ const MonName = styled.h1`
   color: gold;
 
 `
+
+const SideButton = styled.button`
+  
+
+  position: absolute;
+  right:0;
+  padding: 5px 8px;
+  background-color: black;
+  color:white;
+  cursor: pointer;
+  /* top: 15px; */
+  top: 1vh;
+  border:none
+
+  
+`
+const SidePanel = styled.div`
+  
+
+  position: absolute;
+  right:0;
+  top: 8vh;
+  width: 0%;
+  height: 92vh;
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Stay on top */
+  /* top: 0; */
+  /* left: 0; */
+  background-color: black; /* Black*/
+  opacity: 0.8;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  /* padding-top: 60px; Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the 
+  sidepanel */
+  box-shadow: 0 0 5px 0;
+`
+
+const CloseButton = styled.button`
+  margin-top: 1vh;
+  z-index: 3;
+  margin-left: 1vw;
+  padding: 5px 8px;
+  background-color: white;
+  border: none;
+  color:black;
+  cursor: pointer;
+
+
+
+`
 const Span = styled.h3`
   color: #272626;
   font-weight: bolder;
@@ -202,7 +269,7 @@ const Image = styled.img`
 `;
 
 const HeaderInfo = styled.div`
-  
+position: relative;
 flex: 1;
 display: flex;
 margin-left: 10px;
