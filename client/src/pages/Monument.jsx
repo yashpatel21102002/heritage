@@ -1,7 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-// import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Navbar from "../components/Navbar";
 import { BsCart } from "react-icons/bs";
 import { useEffect } from "react";
@@ -42,50 +40,36 @@ function Single(props) {
     <Container>
       {/* <div>Hello jii</div> */}
       {/* navbar */}
-      <Navbar/>
+      <Navbar />
       <Header>
+        <Image src={monument?.img[0]} />
+        <HeaderInfo>
+          <MonName>{monument?.name}</MonName>
+          <Span>City: {monument?.city}</Span>
+          <Span>State: {monument?.state}</Span>
+          <InfoCon>{monument?.desc}</InfoCon>
 
-
-      <Image src={monument?.img[0]}/>
-      <HeaderInfo>
-        <MonName>
-          {monument?.name}
-        </MonName>
-        <Span>
-          City: {monument?.city}
-        </Span>
-        <Span>
-          State: {monument?.state}
-        </Span>
-        <InfoCon>
-          {monument?.desc}
-        </InfoCon>
-     
-        
-        <Wrapper>
-          <Adding onClick={()=>{setbooking(booking+1)}}>
-            Add to Cart
-          </Adding>
-        <Cart>
-          <BsCart/>
-          <Booking>{booking}</Booking>
-        </Cart>
-        </Wrapper>
-          
-     
-
-      </HeaderInfo>
+          <Wrapper>
+            <Adding
+              onClick={() => {
+                setbooking(booking + 1);
+              }}
+            >
+              Add to Cart
+            </Adding>
+            <Cart>
+              <BsCart />
+              <Booking>{booking}</Booking>
+            </Cart>
+          </Wrapper>
+        </HeaderInfo>
       </Header>
-      
-      <H1>About</H1>
-      <About>
-        {monument?.desc}
-      </About>
+
       <H1>Information</H1>
       <Information>
         <Info>
           <h2>Location</h2>
-          <p>{monument?.city}</p>
+          <p >{monument?.location}</p>
         </Info>
 
         <Info>
@@ -120,7 +104,6 @@ function Single(props) {
           </table>
         </Info>
       </Information>
-
       <H1>Ticket Information</H1>
       <TicketInfo>
         <TicketPrice>
@@ -136,11 +119,11 @@ function Single(props) {
 
           <PriceInfo>
             <Visitor>SAARC Visitor</Visitor>
-            <Price>40$</Price>
+            <Price>{monument?.price[0].adult_price}$</Price>
           </PriceInfo>
           <PriceInfo>
             <Visitor>BIMSTEC Visitor</Visitor>
-            <Price>40$</Price>
+            <Price>{monument?.price[0].adult_price}$</Price>
           </PriceInfo>
         </TicketPrice>
         <Terms>
@@ -294,8 +277,8 @@ const Information = styled.div`
 `;
 
 const Info = styled.div`
-  position: relative;
-  margin: 10px;
+  /* position: relative; */
+  margin: 20px;
 `;
 
 const TicketInfo = styled.div`
