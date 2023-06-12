@@ -1,24 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Monument = ({item}) => {
+
+
+  const handleClick = ()=>{
+    window.location.href = `/monument/${item._id}`
+  }
+  
   return (
-    <Link to={`/monument/${item._id}`} style={{ textDecoration: "none",color:"black" }}>
-      <Container>
-        <Imgdiv src={item.img[0]} />
-        <Infodiv>
-          <InfoTitle>{item.name}</InfoTitle>
-          <InfoCity>{item.city}</InfoCity>
-          <Price>
-            $ {item.price[0].adult_price}{" "}
-            <InfoCity style={{ color: "black", fontSize: "16px" }}>
-              per adult
-            </InfoCity>
-          </Price>
-        </Infodiv>
-      </Container>
-    </Link>
+    
+  
+    <Container onClick={handleClick}>
+      <Imgdiv src={item ? item.img[0] : ""} />
+      <Infodiv>
+        <InfoTitle>{item ? item.name : ""}</InfoTitle>
+        <InfoCity>{item ? item.city:""}</InfoCity>
+        <Price>$ {item ? item.price[0].adult_price : ""} <InfoCity style={{color:"black",fontSize:"16px"}}>per adult</InfoCity></Price>
+      </Infodiv>
+    </Container>
+    
+
   );
 }
 
@@ -30,7 +33,7 @@ const Container = styled.div`
   flex-direction: column;
   transition: transform 0.4s;
   /* border:0.5px solid black; */
-  box-shadow: 0 0 10px 0;
+  box-shadow: 0 0 5px 0 white;
 
   &:hover {
     transform: scale(1.1);

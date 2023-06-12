@@ -2,97 +2,114 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import axios from "axios";
 
-const Container = styled.div``;
+
+const Container = styled.div`
+display:flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+`;
 const Box = styled.div`
-  position: absolute;
-  margin-top: 8%;
-  margin-left: 9%;
-  width: 80%;
-  height: 60%;
-  text-align: center;
-  justify-content: center;
   display: flex;
+
+  justify-content: center;
+  align-items: center;
+ 
+  width: 70vw;
+  box-shadow: 0 0 5px 0;
+
+  
 `;
 const DescBox = styled.div`
+  
+
+  flex: 1;
+  width: 35vw;
+  display: flex;
+
   position: relative;
-  background-color: #8f3592;
-  height: 100%;
-  width: 50%;
+
 `;
 
 const Img = styled.img`
-  height: 100%;
-  width: 100%;
-  opacity: 0.8;
+  object-fit: cover;
+  width: 35vw;
+  opacity: 0.6;
+  
+
 `;
 
 const Register = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 35%;
+position: absolute;
+align-self: center;
+justify-self: center;
+left: 8vw;
+
+  
 `;
 
 const Title = styled.p`
-  font-weight: 600;
-  font-size: larger;
-  color: whitesmoke;
+  font-weight: 500;
+  /* color: white; */
+  font-size: 26px;
+ 
 `;
 const Link = styled.a`
-  margin-left: 0vh;
-  color: whitesmoke;
+  color: blue;
+  font-weight: 600;
+  font-size: 18px;
+  
 `;
 
 const LoginBox = styled.div`
-  position: relative;
-  width: 50%;
-  height: 100%;
+
+  flex: 1;
   background-color: #efefe7;
+  /* height: 60vh; */
+  display: flex;
+  flex-direction: column;
+  height: 49vh;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+
 `;
 
 const H2 = styled.h2`
-  margin-top: 50px;
-  margin-left: 250px;
-  border-radius: 10px 10px;
-  background-color: #5870e7;
-  width: 20%;
-  height: 10%;
-  color: #efefe7;
+ 
 `;
 const Username = styled.input`
-  display: block;
-  margin-top: 10%;
-  margin-left: 190px;
-  width: 40%;
   border: none;
-  height: 7%;
-  border-radius: 10px 10px;
+  outline: none;
+  padding: 10px 15px;
+  width: 40%;
+  font-size: 17px;
+  border-radius: 25px;
+  box-shadow: black 0 0 8px 0;
 `;
 const Password = styled.input`
-  display: block;
-  margin-top: 10%;
-  margin-left: 190px;
+border: none;
+  outline: none;
+  padding: 10px 15px;
   width: 40%;
-  border: none;
-  height: 7%;
-  border-radius: 10px 10px;
+  font-size: 17px;
+  border-radius: 25px;
+  box-shadow: black 0 0 8px 0;
+ 
 `;
 const Button = styled.input`
-  font-size: 130%;
-  height: 10%;
-  margin-top: 50px;
-  margin-left: 13px;
-  border-radius: 10px 10px;
-  background-color: #5870e7;
-  width: 20%;
-  border: none;
-  font-weight: 1000;
+  padding: 10px 15px;
   cursor: pointer;
-  color: #efefe7;
+  background-color: violet;
+  border:none;
+  box-shadow: black 0 0 8px 0;
+
 `;
 
 const Warning = styled.p`
-  width: 60%;
-  margin-left: 23%;
+  
+  height: 20px;
 `;
 
 const Login = () => {
@@ -100,6 +117,10 @@ const Login = () => {
   const [password, setpassword] = useState("");
 
   async function submit(e) {
+    
+   
+    
+
     e.preventDefault();
     try {
       document.getElementById("erroe").innerHTML = "";
@@ -111,11 +132,17 @@ const Login = () => {
 
       // Save the token to local storage or cookies
       localStorage.setItem("token", token);
+      
+      setTimeout(()=>{
+        window.alert("SUCCESS")
+
+        window.location.href = "/";
+      },1000)
 
       // Redirect the user to the dashboard
-
-      window.location.href = "/single";
+      
     } catch (e) {
+      
       document.getElementById("erroe").innerHTML = "Wrong credentials!!!";
       console.log(e);
     }
@@ -125,17 +152,17 @@ const Login = () => {
     <Container>
       <Box>
         <DescBox>
-          <Img src="https://monomousumi.com/wp-content/uploads/Taj-Mahal.jpg"></Img>
+          <Img src="https://www.fabhotels.com/blog/wp-content/uploads/2019/04/Khajuraho1.jpg"></Img>
           <Register>
             <Title>Don't Have Account Yet?</Title>
-            <Link href="/register">Login Now</Link>
+            <Link href="/register">Register Now</Link>
           </Register>
         </DescBox>
         <LoginBox>
           <H2>Login</H2>
           <Username
             type="text"
-            placeholder="Username"
+            placeholder="Email"
             onChange={(e) => {
               setemail(e.target.value);
             }}
