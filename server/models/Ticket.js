@@ -5,7 +5,11 @@ const ticketSchema = new mongoose.Schema({
         type:String,
         unique:true,
         required:true,
-
+    },
+    monumentId: {
+        type:String,
+        unique:true,
+        required:true,
     },
     ticket:[
         {
@@ -29,14 +33,13 @@ const ticketSchema = new mongoose.Schema({
         }
         
     ],
-    amount:{
-        type:Number,
-        required:true,
-    },
+    // amount:{
+    //     type:Number,
+    //     required:true,
+    // },
     status:{
         type:String,
         default:"unused",
-
     }
 },{timestamps:true},{collection:"TicketInfo"})
 
