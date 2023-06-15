@@ -84,6 +84,12 @@ router.post("/auth/login",async(req,res)=>{
 })
 
 
+// router.get('/auth/user', (req, res) => {
+//   // Assuming user details are stored in req.user
+//   const userDetails = ;
+
+//   res.json(userDetails);
+// });
 
 
 export default router;

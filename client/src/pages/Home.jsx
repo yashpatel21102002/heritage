@@ -21,7 +21,4 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-image:linear-gradient(#5C469C,#D4ADFC);
-
-
-
 `

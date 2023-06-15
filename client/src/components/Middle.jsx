@@ -49,20 +49,7 @@ const Middle = () => {
             setFilterMonument(monuments.filter((item)=>Object.entries(filters).every(([key,value])=>item[key].includes(value))))
           
           
-           
-            
          
-        
-
-      
-            
-       
-        
-            
-            
-          
-        
-        
     },[filters,monuments,isSearched])
 
     useEffect(()=>{
@@ -324,9 +311,7 @@ const Result_Container2 = styled.div`
     border-radius: 0 0 25px 0;
     padding-top:10px;
     padding-left: 10px;
-    /* z-index:55; */
-    
-
+    /* z-index:55; */    
 `
 
 
@@ -366,9 +351,7 @@ const Cards = styled.div`
 
     
     ::-webkit-scrollbar{
-        width: 6px;
-     
-        
+        width: 6px;    
     }
 
     /* Track */
@@ -383,11 +366,6 @@ const Cards = styled.div`
         
        
     }
-
-    
-
-
-
 
 `
 

@@ -57,9 +57,6 @@ const Title = styled.h1`
     margin-left: 5px;
     text-overflow: ellipsis;
     overflow: hidden;
-
-
-
 `
 
 const Span = styled.div`

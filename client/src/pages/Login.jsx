@@ -132,6 +132,7 @@ const Login = () => {
 
       // Save the token to local storage or cookies
       localStorage.setItem("token", token);
+      console.log(token);
       
       setTimeout(()=>{
         window.alert("SUCCESS")
