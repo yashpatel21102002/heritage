@@ -1,10 +1,21 @@
 import express from 'express'
 import Ticket from '../models/Ticket.js'
+import verifyToken from './verifyToken.js';
+import jwt from 'jsonwebtoken'
 
 const router = express.Router();
 
-router.post("/ticket",async(req,res)=>{
-    const newTicket = new Ticket(req.body);
+router.post("/ticket",verifyToken,async(req,res)=>{
+    const token = req.body.token;
+    
+    const data = req.body.monumentId;
+   
+    const decode_email = await jwt.decode(token).email;
+    
+  
+    // const monumentId = req.body.data.monumentId;
+
+    const newTicket = new Ticket({userEmail:decode_email,monumentId:data});
     try{
         const savedTicket = await newTicket.save()
         res.status(201).json(savedTicket)
@@ -14,13 +25,13 @@ router.post("/ticket",async(req,res)=>{
     }
 })
 
-router.get("/tickets", async (req, res) => {
+router.get("/tickets", verifyToken,async (req, res) => {
     const OutputTickets = await Ticket.find();
 
     res.status(200).json(OutputTickets);
 })
 
-router.get("/ticket/:id", async (req, res) => {
+router.get("/ticket/:id", verifyToken,async (req, res) => {
     const id = req.params.id;
 
      try{
@@ -31,7 +42,7 @@ router.get("/ticket/:id", async (req, res) => {
     }
 })
 
-router.delete("/ticket/:id", async (req, res) => {
+router.delete("/ticket/:id",verifyToken, async (req, res) => {
     const id = req.params.id;
 
     try{
@@ -43,7 +54,7 @@ router.delete("/ticket/:id", async (req, res) => {
     }
 })
 
-router.put("/ticket/:id",async(req,res)=>{
+router.put("/ticket/:id",verifyToken,async(req,res)=>{
     const id=req.params.id;
 
     try{
