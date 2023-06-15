@@ -51,8 +51,6 @@ function Single(props) {
     );
   }
 
-
-
   return (
     <Container>
  
@@ -62,7 +60,7 @@ function Single(props) {
         <HeaderInfo>
           <SideButton onClick={handleSidePanel}>Open</SideButton>
           <SidePanel id="sidepanel">
-            <CloseButton onClick={CloseSidePanel}>×Close</CloseButton>
+            <CloseButton onClick={CloseSidePanel}>× Close</CloseButton>
              {/* from here you can make any container and make one new card named as CartMonument or anything and map it here and make one or two buttons that can lead use to cart and checkout page  */}
 
             <SCartCards id={monumentId} />

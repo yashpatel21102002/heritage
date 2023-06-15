@@ -128,11 +128,11 @@ const Login = () => {
         "http://localhost:8000/api/auth/login",
         { email, password }
       );
-      const token = response.data.accesstoken;
+      const token = response.data.accessToken;
 
       // Save the token to local storage or cookies
       localStorage.setItem("token", token);
-      console.log(token);
+      // console.log(token);
       
       setTimeout(()=>{
         window.alert("SUCCESS")

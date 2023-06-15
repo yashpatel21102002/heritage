@@ -6,12 +6,11 @@ import axios from "axios";
 const SCartCards = ({ id }) => {
   const [monument, setMonument] = useState([]);
 
-  
+
   useEffect(() => {
     const getMonument = async () => {
       try {
-        // let res;
-
+        
         const res = await axios.get("http://localhost:8000/api/monument/" + id);
 
         setMonument(res.data);

@@ -26,8 +26,6 @@ router.get("/ticket/:id", async (req, res) => {
      try{
         const oneTicket=await Ticket.findById(id);
         res.status(200).json(oneTicket);
-
-
     }catch(e){
         res.status(500).json(e);
     }
