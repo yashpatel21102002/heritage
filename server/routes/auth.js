@@ -65,7 +65,7 @@ router.post("/auth/login",async(req,res)=>{
             //we will use jwt for this process
             const accessToken = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:"21d"})
             if(res.status(201)){
-                return res.json({status:"ok",data:accessToken})
+                return res.json({status:"ok",accessToken:accessToken})
             }
             else{
                 return res.json({error:"error in accesstoken"})

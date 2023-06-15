@@ -6,13 +6,14 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import SCartCards from "../components/SCartCards";
-import Parse from "parse";
+// import Parse from "parse";
 
 
 function Single(props) {
   const [booking, setbooking] = useState(0);
   const [monument, setMonument] = useState();
   const [monumentId, setMonumentId] = useState("");
+
 
   
   
@@ -41,14 +42,28 @@ function Single(props) {
     // console.log(monument)
 
 
-  })
+  },[1])
 
 
   async function handleMonument() {
     
+    const token = localStorage.getItem('token');
+    console.log(token)
+
+    var data = {
+      monumentId : id,
+      token:token
+
+
+
+    }
+
+    
+
     const PostMonument = await axios.post(
-      "http://localhost:8000/api/ticket",{id}
+      "http://localhost:8000/api/ticket",data
     );
+    console.log(PostMonument)
   }
 
 
