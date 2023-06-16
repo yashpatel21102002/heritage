@@ -11,8 +11,7 @@ const ticketSchema = new mongoose.Schema({
        
         required:true,
     },
-    ticket:[
-        {
+        
             adults:{
                 type:Number,
                 required:true,
@@ -30,9 +29,7 @@ const ticketSchema = new mongoose.Schema({
             },
 
            
-        }
         
-    ],
     // amount:{
     //     type:Number,
     //     required:true,

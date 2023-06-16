@@ -9,26 +9,41 @@ router.post("/ticket",verifyToken,async(req,res)=>{
     const token = req.body.token;
     
     const data = req.body.monumentId;
+    console.log(token,data)
    
     const decode_email = await jwt.decode(token).email;
+
     
   
     // const monumentId = req.body.data.monumentId;
-
+    console.log(decode_email)
     const newTicket = new Ticket({userEmail:decode_email,monumentId:data});
+    console.log(newTicket)
     try{
         const savedTicket = await newTicket.save()
         res.status(201).json(savedTicket)
 
     }catch(e){
-        res.status(500).json(e);
+        return res.status(500).json(e);
     }
 })
 
-router.get("/tickets", verifyToken,async (req, res) => {
-    const OutputTickets = await Ticket.find();
+router.get("/ticket", verifyToken,async (req, res) => {
+    const token = req.body.token;
+    const decode_email = await jwt.decode(token)?.email;
+    try{
+        const OutputTickets = await Ticket.find({
+            userEmail:{
+                $in:[decode_email]
+            }
+        });
+    
+        res.status(200).json(OutputTickets);
 
-    res.status(200).json(OutputTickets);
+    }catch(e){
+        res.status(500).json(e);
+    }
+    
 })
 
 router.get("/ticket/:id", verifyToken,async (req, res) => {
