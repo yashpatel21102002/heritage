@@ -5,12 +5,12 @@ import jwt from 'jsonwebtoken'
 
 const router = express.Router();
 
-router.post("/ticket",verifyToken,async(req,res)=>{
+router.post("/ticket",async(req,res)=>{
     const token = req.body.token;
     
     const data = req.body.monumentId;
    
-    const decode_email = await jwt.decode(token).email;
+    const decode_email = await jwt.decode(token)?.email;
     
   
     // const monumentId = req.body.data.monumentId;
@@ -25,7 +25,7 @@ router.post("/ticket",verifyToken,async(req,res)=>{
     }
 })
 
-router.get("/tickets", verifyToken,async (req, res) => {
+router.get("/ticket",verifyToken,async (req, res) => {
     const OutputTickets = await Ticket.find();
 
     res.status(200).json(OutputTickets);

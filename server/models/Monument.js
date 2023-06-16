@@ -9,7 +9,6 @@ const monumentSchema  = new mongoose.Schema({
     },
     desc:{
         type:String,
-        default:"lorem50aojmpxepjfpapkfpkfpkafppfkkkkfkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkddddddddddddddddddddddddddddddddddddddddfjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjffjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
         
     },
     img:{
@@ -24,7 +23,7 @@ const monumentSchema  = new mongoose.Schema({
             nationality:{
             type:String,
             // required:true,
-            default:"INDIAN"
+            // default:"INDIAN"
            },
             adult_price:{
                 type:Number,

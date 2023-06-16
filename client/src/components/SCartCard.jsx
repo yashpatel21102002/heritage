@@ -7,9 +7,10 @@ import { IoCalendar } from "react-icons/io5";
 function SCartCard({ item }) {
   
   //  const handleClick = () => {
-     window.location.href = `/monument/${item._id}`;
+    //  window.location.href = `/monument/${item._id}`;
   //  };
-  
+  // const monumentId = item.monumentId;
+
   return (
     <Ticket>
       <TicketImg src={item ? item.img[0] : ""} />

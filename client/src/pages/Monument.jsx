@@ -6,16 +6,12 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import SCartCards from "../components/SCartCards";
-// import Parse from "parse";
 
 
 function Single(props) {
   const [booking, setbooking] = useState(0);
   const [monument, setMonument] = useState();
-  const [monumentId, setMonumentId] = useState("");
-
-
-  
+  const [monumentId, setMonumentId] = useState("");  
   
   const location = useLocation()
   const id = location.pathname.split("/")[2];
@@ -53,12 +49,7 @@ function Single(props) {
     var data = {
       monumentId : id,
       token:token
-
-
-
-    }
-
-    
+    }    
 
     const PostMonument = await axios.post(
       "http://localhost:8000/api/ticket",data
@@ -222,10 +213,7 @@ const SidePanel = styled.div`
   height: auto;
   position: fixed;  //Stay in place
   z-index: 2; /* Stay on top */
-  /* top: 0; */
-  /* left: 0; */
   background-color: black;
-  /* opacity: 0.8; */
   overflow-x: hidden; //Disable horizontal scroll
   /* padding-top: 60px; Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the 

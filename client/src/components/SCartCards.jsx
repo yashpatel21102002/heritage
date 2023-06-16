@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SCartCard from "./SCartCard";
 import axios from "axios";
 
-const SCartCards = ({ id }) => {
+const SCartCards = ({ }) => {
   const [monument, setMonument] = useState([]);
 
 
@@ -11,7 +11,7 @@ const SCartCards = ({ id }) => {
     const getMonument = async () => {
       try {
         
-        const res = await axios.get("http://localhost:8000/api/monument/" + id);
+        const res = await axios.get("http://localhost:8000/api/tickets");
 
         setMonument(res.data);
       } catch (error) {
@@ -19,7 +19,7 @@ const SCartCards = ({ id }) => {
       }
     };
     getMonument();
-  }, [id]);
+  }, []);
 
   return (
     <SliderTicket>
