@@ -28,9 +28,12 @@ router.post("/ticket",verifyToken,async(req,res)=>{
     }
 })
 
-router.get("/ticket", verifyToken,async (req, res) => {
-    const token = req.body.token;
-    const decode_email = await jwt.decode(token)?.email;
+router.get("/ticket/:token",async (req, res) => {
+    const ttoken = req.params.token
+    const token = JSON.parse(ttoken)
+    console.log(token)
+    const decode_email = await jwt.decode(token).email;
+    console.log(decode_email,token)
     try{
         const OutputTickets = await Ticket.find({
             userEmail:{
@@ -38,10 +41,10 @@ router.get("/ticket", verifyToken,async (req, res) => {
             }
         });
     
-        res.status(200).json(OutputTickets);
+        return res.status(200).json(OutputTickets);
 
     }catch(e){
-        res.status(500).json(e);
+        return res.status(500).json(e);
     }
     
 })

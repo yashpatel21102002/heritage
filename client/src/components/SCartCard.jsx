@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IoCalendar } from "react-icons/io5";
+import axios from "axios";
 
 
 
-function SCartCard({ item }) {
-  
-  //  const handleClick = () => {
-     window.location.href = `/monument/${item._id}`;
-  //  };
-  
+function SCartCard({item}) {
+  const [monument,setMonument] = useState({})
+  useEffect(()=>{
+    const getMonument = async ()=>{
+      const helloMonument = (await axios.get(`http://localhost:8000/api/monument/${item.monumentId}`)).data;
+      console.log(helloMonument)
+      setMonument(helloMonument)
+
+    }
+    getMonument()
+  },[])
+ 
   return (
     <Ticket>
-      <TicketImg src={item ? item.img[0] : ""} />
+      <TicketImg src=""/>
 
-      <TicketName>{item ? item.name:""}</TicketName>
+      <TicketName>{monument?.name}</TicketName>
       <Date>here date comes</Date>
       <CalenderLogo></CalenderLogo>
 

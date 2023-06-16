@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.body.token;
+    console.log(authHeader)
     if (authHeader) {
         const token = authHeader;
         jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
@@ -12,6 +13,7 @@ const verifyToken = (req, res, next) => {
         })
 
     } else {
+        console.log("fuck you bitch")
         return res.status(401).json("you are not authenticated!")
     }
 };

@@ -12,7 +12,8 @@ import SCartCards from "../components/SCartCards";
 function Single(props) {
   const [booking, setbooking] = useState(0);
   const [monument, setMonument] = useState();
-  const [freq, setfreq] = useState(0);
+  const [freq, setfreq] = useState(6);
+  const [tickets,setTickets] = useState([])
 
 
   
@@ -46,25 +47,35 @@ function Single(props) {
 
 
   async function handleMonument() {
-  
     const token = localStorage.getItem('token');
-
+    
     var data = {
       monumentId : id,
       token:JSON.parse(token)
-
-
-
+      
+      
+      
     }
-
     
-
+    console.log(data.token)
+    
+    
+    
     const PostMonument = await axios.post(
       "http://localhost:8000/api/ticket",data
-    );
-    // console.log(PostMonument)
-  }
+      );
+      
+      
+      setfreq(freq+1)
 
+  }
+  
+  
+
+  
+    
+
+ 
 
 
   return (
@@ -79,7 +90,7 @@ function Single(props) {
             <CloseButton onClick={CloseSidePanel}>×Close</CloseButton>
              {/* from here you can make any container and make one new card named as CartMonument or anything and map it here and make one or two buttons that can lead use to cart and checkout page  */}
 
-            <SCartCards freq={freq}/>
+            <SCartCards tickets={tickets} freq={freq}/>
             <SliderTotal />
           </SidePanel>
           <MonName>{monument?.name}</MonName>
