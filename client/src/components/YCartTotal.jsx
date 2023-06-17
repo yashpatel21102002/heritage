@@ -17,7 +17,7 @@ const YCartTotal = () => {
 
       </Wrapper1>
       <Wrapper2>
-        <Items style={{alignItems:'center',gap:'8px'}}>
+        <Items style={{alignItems:'center',gap:'3px'}}>
           <Item>Total : 5000</Item>
          
           <Item>Extra : 200</Item>
