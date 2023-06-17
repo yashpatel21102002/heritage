@@ -7,9 +7,9 @@ const YCartTotal = () => {
       <Wrapper1>
         <Items style={{justifyContent:'center'}}>
           <Item><b>1. </b>Payment is not refundable</Item>
-          <Item><b>2. </b>If the payment of monument is zero, we will provide dummy ticket</Item>
-          <Item><b>3. </b>Please choose the date valid date</Item>
-          <Item><b>4. </b>Once paid pdf of ticket will be sent!</Item>
+          
+          <Item><b>2. </b>Please choose the date valid date</Item>
+          <Item><b>3. </b>Once paid pdf of ticket will be sent!</Item>
          
          
           
@@ -17,7 +17,7 @@ const YCartTotal = () => {
 
       </Wrapper1>
       <Wrapper2>
-        <Items style={{alignItems:'center',gap:'8px'}}>
+        <Items style={{alignItems:'center',gap:'3px'}}>
           <Item>Total : 5000</Item>
          
           <Item>Extra : 200</Item>
@@ -66,7 +66,7 @@ const Wrapper2 = styled.div`
   display: flex;
   /* padding-top: 10px; */
   justify-content: center;
-  padding-left: 5vw;
+  /* padding-left: 5vw; */
   align-items: center;
 
 `
@@ -75,7 +75,8 @@ const Items = styled.ul`
   display: flex;
   flex-direction: column;
   
-  gap: 5px;
+  /* gap: 5px; */
+  /* height: 16vh; */
   /* justify-content: ; */
   /* align-items: center; */
   color: white;
