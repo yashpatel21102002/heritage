@@ -1,36 +1,48 @@
 import React from 'react'
 import styled from 'styled-components'
+import StripeCheckout from "react-stripe-checkout";
+
+const KEY = process.env.STRIPE_KEY;
 
 const YCartTotal = () => {
   return (
     <Container>
       <Wrapper1>
-        <Items style={{justifyContent:'center'}}>
-          <Item><b>1. </b>Payment is not refundable</Item>
-          
-          <Item><b>2. </b>Please choose the date valid date</Item>
-          <Item><b>3. </b>Once paid pdf of ticket will be sent!</Item>
-         
-         
-          
-        </Items>
+        <Items style={{ justifyContent: "center" }}>
+          <Item>
+            <b>1. </b>Payment is not refundable
+          </Item>
 
+          <Item>
+            <b>2. </b>Please choose the date valid date
+          </Item>
+          <Item>
+            <b>3. </b>Once paid pdf of ticket will be sent!
+          </Item>
+        </Items>
       </Wrapper1>
       <Wrapper2>
-        <Items style={{alignItems:'center',gap:'3px'}}>
+        <Items style={{ alignItems: "center", gap: "3px" }}>
           <Item>Total : 5000</Item>
-         
+
           <Item>Extra : 200</Item>
           <Item>Grand Total : 5300</Item>
-          <Button>Checkout</Button>
-          
-        
-        </Items>
-        
 
+          <StripeCheckout
+            // {/* name="Lama Shop" */}
+            // {/* image="https://avatars.githubusercontent.com/u/1486366?v=4" */}
+            // {/* billingAddress shippingAddress description= */}
+            // {/* {`Your total is $ ${cart.total}`} */}
+            // {/* amount={cart.total * 100} */}
+            // {/* token={onToken} */}
+            stripeKey={KEY}
+            >
+            <Button>Checkout</Button>
+          </StripeCheckout>
+        </Items>
       </Wrapper2>
     </Container>
-  )
+  );
 }
 
 export default YCartTotal
