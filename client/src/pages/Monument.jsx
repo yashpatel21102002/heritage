@@ -311,6 +311,10 @@ const Adding = styled.button`
   color: #675802;
   font-size: 18px;
   font-weight: bolder;
+  :hover{
+    cursor: pointer;
+    box-shadow: 0 0 5px 0 white;
+  }
 
 `
 const Cart = styled.div`
