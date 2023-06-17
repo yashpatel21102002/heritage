@@ -3,10 +3,25 @@ import styled from "styled-components";
 import SCartCard from "./SCartCard";
 import axios from "axios";
 
-const SCartCards = () => {
-  const [ticket, setTicket] = useState([]);
+const SCartCards = ({freq}) => {
+  const [tickets,setTickets] = useState([])
 
-  const token = localStorage.getItem('token');
+  useEffect(()=>{
+
+    const getTicket = async()=>{
+      const token = localStorage.getItem('token')
+    
+      
+      const res  =  await axios.get(`http://localhost:8000/api/ticket/${token}`);
+      console.log(res.data)
+      setTickets(res.data)
+    }
+
+    getTicket();
+    // console.log(monument)
+
+
+  },[freq])
   
 
   return (
@@ -14,7 +29,7 @@ const SCartCards = () => {
 
       
     {/* Monument=monument; */}
-      {ticket.map((item) => <SCartCard item={item} />)}
+      {tickets.map((item) => <SCartCard item={item} />)}
     </SliderTicket>
   );
 };
@@ -24,8 +39,8 @@ export default SCartCards;
 const SliderTicket = styled.div`
   display: flex;
   width: 45vw;
-  height: 60vh;
-  background-color: green;
+  height: 70vh;
+  /* background-color: green; */
   align-items: center;
   /* justify-content: center; */
   /* flex-direction: column; */

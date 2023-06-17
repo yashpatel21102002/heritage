@@ -1,6 +1,6 @@
 import express from 'express'
 import Ticket from '../models/Ticket.js'
-import verifyToken from './verifyToken.js';
+import {verifyToken,verifyGetRequest} from './verifyToken.js';
 import jwt from 'jsonwebtoken'
 
 const router = express.Router();
@@ -28,9 +28,12 @@ router.post("/ticket",async(req,res)=>{
     }
 })
 
-router.get("/ticket", verifyToken,async (req, res) => {
-    const token = req.body.token;
-    const decode_email = await jwt.decode(token)?.email;
+router.get("/ticket/:token",verifyGetRequest,async (req, res) => {
+    const ttoken = req.params.token
+    const token = JSON.parse(ttoken)
+    console.log(token)
+    const decode_email = await jwt.decode(token).email;
+    console.log(decode_email,token)
     try{
         const OutputTickets = await Ticket.find({
             userEmail:{
@@ -38,24 +41,15 @@ router.get("/ticket", verifyToken,async (req, res) => {
             }
         });
     
-        res.status(200).json(OutputTickets);
+        return res.status(200).json(OutputTickets);
 
     }catch(e){
-        res.status(500).json(e);
+        return res.status(500).json(e);
     }
     
 })
 
-router.get("/ticket/:id", verifyToken,async (req, res) => {
-    const id = req.params.id;
 
-     try{
-        const oneTicket=await Ticket.findById(id);
-        res.status(200).json(oneTicket);
-    }catch(e){
-        res.status(500).json(e);
-    }
-})
 
 router.delete("/ticket/:id",verifyToken, async (req, res) => {
     const id = req.params.id;
@@ -69,12 +63,13 @@ router.delete("/ticket/:id",verifyToken, async (req, res) => {
     }
 })
 
-router.put("/ticket/:id",verifyToken,async(req,res)=>{
-    const id=req.params.id;
+router.put("/ticket/:monumentId/:token",verifyGetRequest,async(req,res)=>{
+    const monumentId=req.params.monumentId;
+
 
     try{
 
-        const tobeUpdatedTicket=await Ticket.findByIdAndUpdate(id,{$set:req.body},{new:true});
+        const tobeUpdatedTicket=await Ticket.findByIdAndUpdate({monumentId:monumentId},{$set:req.body},{new:true});
         res.status(200).json(tobeUpdatedTicket);
 
 

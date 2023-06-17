@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IoCalendar } from "react-icons/io5";
+import axios from "axios";
 
 
 
-function SCartCard({ item }) {
-  
-  //  const handleClick = () => {
-    //  window.location.href = `/monument/${item._id}`;
-  //  };
-  // const monumentId = item.monumentId;
+function SCartCard({item}) {
+  const [monument,setMonument] = useState({})
+  useEffect(()=>{
+    const getMonument = async ()=>{
+      const helloMonument = (await axios.get(`http://localhost:8000/api/monument/${item.monumentId}`)).data;
+      console.log(helloMonument)
+      setMonument(helloMonument)
 
+    }
+    getMonument()
+  },[])
+ 
   return (
     <Ticket>
-      <TicketImg src={item ? item.img[0] : ""} />
+      <TicketImg src={monument.img === undefined ? "":monument.img[0]}/>
 
-      <TicketName>{item ? item.name:""}</TicketName>
+      <TicketName>{monument?.name}</TicketName>
       <Date>here date comes</Date>
       <CalenderLogo></CalenderLogo>
 
@@ -88,7 +94,7 @@ const Ticket = styled.div`
   background-color: white;
   margin-left: 2vw;
   display: flex;
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
 `;
 
 const TicketImg = styled.img`
@@ -100,9 +106,10 @@ const TicketImg = styled.img`
   object-fit: cover;
 `;
 
-const TicketName = styled.h1`
+const TicketName = styled.h3`
   margin-left: 10px;
-  font-size: 27px;
+  /* font-size: 27px; */
+  margin-top: 5px;
   font-weight: 550;
 `;
 

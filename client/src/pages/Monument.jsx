@@ -6,12 +6,15 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import SCartCards from "../components/SCartCards";
+import YCartTotal from "../components/YCartTotal";
+// import Parse from "parse";
 
 
 function Single(props) {
   const [booking, setbooking] = useState(0);
   const [monument, setMonument] = useState();
-  const [freq, setfreq] = useState(0);
+  const [freq, setfreq] = useState(6);
+  const [tickets,setTickets] = useState([])
 
 
   
@@ -20,7 +23,7 @@ function Single(props) {
   const id = location.pathname.split("/")[2];
  
   const handleSidePanel = ()=>{
-    document.getElementById('sidepanel').style.width = "45vw"
+    document.getElementById('sidepanel').style.width = "50vw"
     
   }
 
@@ -45,21 +48,36 @@ function Single(props) {
 
 
   async function handleMonument() {
-  
     const token = localStorage.getItem('token');
-
+    
     var data = {
       monumentId : id,
       token:JSON.parse(token)
+      
+      
+      
     }
-
     
-
+    console.log(data.token)
+    
+    
+    
     const PostMonument = await axios.post(
       "http://localhost:8000/api/ticket",data
-    );
-    // console.log(PostMonument)
+      );
+      
+      
+      setfreq(freq+1)
+
   }
+  
+  
+
+  
+    
+
+ 
+
 
   return (
     <Container>
@@ -73,8 +91,11 @@ function Single(props) {
             <CloseButton onClick={CloseSidePanel}>× Close</CloseButton>
              {/* from here you can make any container and make one new card named as CartMonument or anything and map it here and make one or two buttons that can lead use to cart and checkout page  */}
 
-            <SCartCards freq={freq}/>
-            <SliderTotal />
+            <SCartCards tickets={tickets} freq={freq}/>
+            <hr style={{color:'white',margin:'10px 0 0 0'}}/>
+            <SliderTotal>
+              <YCartTotal/>
+            </SliderTotal>
           </SidePanel>
           <MonName>{monument?.name}</MonName>
           <Span>City: {monument?.city}</Span>
@@ -291,6 +312,10 @@ const Adding = styled.button`
   color: #675802;
   font-size: 18px;
   font-weight: bolder;
+  :hover{
+    cursor: pointer;
+    box-shadow: 0 0 5px 0 white;
+  }
 
 `
 const Cart = styled.div`
@@ -360,7 +385,8 @@ const Li = styled.li`
 `;
 const SliderTotal = styled.div`
   width: 45vw;
-  height:25vh;
-  background-color: red;
+  height:16vh;
+  display: flex;
+  /* background-color: red; */
   /* margin-left: 1vw; */
 `;
