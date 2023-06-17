@@ -5,7 +5,7 @@ const YCartTotal = () => {
   return (
     <Container>
       <Wrapper1>
-        <Items style={{justifyContent:'center'}}>
+        <Items style={{justifyContent:'center',height:'16vh'}}>
           <Item><b>1. </b>Payment is not refundable</Item>
           <Item><b>2. </b>If the payment of monument is zero, we will provide dummy ticket</Item>
           <Item><b>3. </b>Please choose the date valid date</Item>
@@ -75,7 +75,8 @@ const Items = styled.ul`
   display: flex;
   flex-direction: column;
   
-  gap: 5px;
+  /* gap: 5px; */
+  /* height: 16vh; */
   /* justify-content: ; */
   /* align-items: center; */
   color: white;

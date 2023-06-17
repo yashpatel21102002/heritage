@@ -22,8 +22,8 @@ function SCartCard({item}) {
       <TicketImg src={monument.img === undefined ? "":monument.img[0]}/>
 
       <TicketName>{monument?.name}</TicketName>
-      <Date>here date comes</Date>
-      <CalenderLogo></CalenderLogo>
+      
+      <CalenderLogo/>
 
       <FilterCity>
         <FilterStateOption selected disabled>
