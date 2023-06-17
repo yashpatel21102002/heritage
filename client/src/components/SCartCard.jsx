@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IoCalendar } from "react-icons/io5";
 import axios from "axios";
-import {Calendar} from "@natscale/react-calendar"
 
 
 
@@ -251,6 +250,7 @@ outline: none;
 border: none;
 font-size: 16px;
 background-color:#f6f2f6 ;
+width: 9vw;
 
 `
 
