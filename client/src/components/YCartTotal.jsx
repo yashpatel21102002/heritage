@@ -5,10 +5,11 @@ const YCartTotal = () => {
   return (
     <Container>
       <Wrapper1>
-        <Items style={{justifyContent:'center',height:'16vh'}}>
+        <Items style={{justifyContent:'center'}}>
           <Item><b>1. </b>Payment is not refundable</Item>
-          <Item><b>2. </b>If the payment of monument is zero, we will provide dummy ticket</Item>
-          <Item><b>4. </b>Once paid pdf of ticket will be sent!</Item>
+          
+          <Item><b>2. </b>Please choose the date valid date</Item>
+          <Item><b>3. </b>Once paid pdf of ticket will be sent!</Item>
          
          
           

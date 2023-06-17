@@ -388,7 +388,7 @@ const Li = styled.li`
 `;
 const SliderTotal = styled.div`
   width: 45vw;
-  height:16vh;
+  height:18vh;
   display: flex;
   /* background-color: red; */
   /* margin-left: 1vw; */
