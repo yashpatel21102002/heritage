@@ -3,30 +3,18 @@ import styled from "styled-components";
 import SCartCard from "./SCartCard";
 import axios from "axios";
 
-const SCartCards = ({ }) => {
-  const [monument, setMonument] = useState([]);
+const SCartCards = () => {
+  const [ticket, setTicket] = useState([]);
 
-
-  useEffect(() => {
-    const getMonument = async () => {
-      try {
-        
-        const res = await axios.get("http://localhost:8000/api/tickets");
-
-        setMonument(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getMonument();
-  }, []);
+  const token = localStorage.getItem('token');
+  
 
   return (
     <SliderTicket>
 
       
     {/* Monument=monument; */}
-      {monument.map((item) => <SCartCard item={item} />)}
+      {ticket.map((item) => <SCartCard item={item} />)}
     </SliderTicket>
   );
 };

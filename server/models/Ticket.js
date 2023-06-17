@@ -25,7 +25,6 @@ const ticketSchema = new mongoose.Schema({
                 default:"INDIAN",
             },
            
-
     status:{
         type:String,
         default:"unused",
