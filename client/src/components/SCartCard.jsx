@@ -94,7 +94,7 @@ const Ticket = styled.div`
   background-color: white;
   margin-left: 2vw;
   display: flex;
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
 `;
 
 const TicketImg = styled.img`
@@ -106,9 +106,10 @@ const TicketImg = styled.img`
   object-fit: cover;
 `;
 
-const TicketName = styled.h1`
+const TicketName = styled.h3`
   margin-left: 10px;
-  font-size: 27px;
+  /* font-size: 27px; */
+  margin-top: 5px;
   font-weight: 550;
 `;
 

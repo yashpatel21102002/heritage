@@ -39,8 +39,8 @@ export default SCartCards;
 const SliderTicket = styled.div`
   display: flex;
   width: 45vw;
-  height: 60vh;
-  background-color: green;
+  height: 70vh;
+  /* background-color: green; */
   align-items: center;
   /* justify-content: center; */
   /* flex-direction: column; */

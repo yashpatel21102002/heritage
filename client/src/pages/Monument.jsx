@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import SCartCards from "../components/SCartCards";
+import YCartTotal from "../components/YCartTotal";
 // import Parse from "parse";
 
 
@@ -91,7 +92,10 @@ function Single(props) {
              {/* from here you can make any container and make one new card named as CartMonument or anything and map it here and make one or two buttons that can lead use to cart and checkout page  */}
 
             <SCartCards tickets={tickets} freq={freq}/>
-            <SliderTotal />
+            <hr style={{color:'white',margin:'10px 0 0 0'}}/>
+            <SliderTotal>
+              <YCartTotal/>
+            </SliderTotal>
           </SidePanel>
           <MonName>{monument?.name}</MonName>
           <Span>City: {monument?.city}</Span>
@@ -384,7 +388,8 @@ const Li = styled.li`
 `;
 const SliderTotal = styled.div`
   width: 45vw;
-  height:25vh;
-  background-color: red;
+  height:16vh;
+  display: flex;
+  /* background-color: red; */
   /* margin-left: 1vw; */
 `;
