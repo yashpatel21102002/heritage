@@ -30,6 +30,7 @@ const verifyGetRequest = (req,res,next) => {
         })
     }else{
         console.log("ok i am very dangourous error")
+        
         return res.status(401).json("you are not authenticated!")
     }
 }

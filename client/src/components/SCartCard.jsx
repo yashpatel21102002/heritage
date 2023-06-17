@@ -12,11 +12,27 @@ function SCartCard({item}) {
   const [date,setDate] = useState()
   const [adults,setAdults] = useState(1)
   const [children,setChildren] = useState(0)
-  const [total,setTotal] = useState(0)
+  const [indian,setIndian] = useState(true)
+  const [total,setTotal] = useState()
   
+  
+
+  useEffect(()=>{
+    const getMonument = async ()=>{
+      const helloMonument = (await axios.get(`http://localhost:8000/api/monument/${item.monumentId}`)).data;
+      console.log(helloMonument)
+      setMonument(helloMonument)
+      await setTotal(monument.price === undefined ? "":monument.price[0].adult_price)
+     
+    }
+    getMonument()
+    
+  },[])
+
   const minus = ()=>{
     if(adults-1 > 0){
       setAdults(adults-1);
+      setTotal(total - monument.price === undefined ? "":monument.price[indian ? 0 : 1].adult_price)
      
     }
     
@@ -25,25 +41,17 @@ function SCartCard({item}) {
   const minusChild = ()=>{
     if(children  > 0){
       setChildren(children-1)
+      setTotal(total - monument.price === undefined ? "":monument.price[indian ? 0 : 1].child_price)
     }
   }
 
   const plus = ()=>{
     setAdults(adults+1)
+    
   }
   const plusChild = ()=>{
     setChildren(children+1)
-  }
-
-  useEffect(()=>{
-    const getMonument = async ()=>{
-      const helloMonument = (await axios.get(`http://localhost:8000/api/monument/${item.monumentId}`)).data;
-      console.log(helloMonument)
-      setMonument(helloMonument)
-
     }
-    getMonument()
-  },[])
  
  
   return (
@@ -59,7 +67,17 @@ function SCartCard({item}) {
             <IoCalendar style={{fontSize:'22px'}}/>
           </Sub>
           <Sub1>
-            <Filter>
+            <Filter onChange={(e)=>{
+              if(e.target.value === "foreigner"){
+                setIndian(false)
+                setTotal(monument === undefined ? "":monument.price[1].adult_price)
+              }
+              else{
+                setIndian(true)
+                setTotal(monument === undefined ? "":monument.price[0].adult_price)
+
+              }
+            }}>
               <Option>Indian</Option>
               <Option>foreigner</Option>
             </Filter>
@@ -68,10 +86,10 @@ function SCartCard({item}) {
         <Wrapper2>
         <Sub3>
           <Info>
-            Adults-Price : <b>{monument.price === undefined ? "":monument.price[0].adult_price}</b>
+            Adults-Price : <b>{monument.price === undefined ? "":monument.price[indian ? 0 : 1].adult_price}</b>
           </Info>
           <Info>
-            Child-Price : <b>{monument.price === undefined ? "":monument.price[0].child_price}</b>
+            Child-Price : <b>{monument.price === undefined ? "":monument.price[indian ? 0 : 1].child_price}</b>
           </Info>
             
           </Sub3>
@@ -97,7 +115,7 @@ function SCartCard({item}) {
 
         </Wrapper2>
         <Wrapper3>
-          <h2>Total : 625$</h2>
+          <h2>Total : {!total ? monument.price ===undefined ? "":monument.price[0].adult_price : total}$</h2>
           <Button>
             Save Changes
           </Button>
