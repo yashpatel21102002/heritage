@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import StripeCheckout from "react-stripe-checkout";
 
-const KEY = process.env.STRIPE_KEY;
+const KEY = process.env.REACT_STRIPE_KEY;
 
 const YCartTotal = () => {
   return (
