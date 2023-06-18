@@ -7,6 +7,7 @@ import axios from "axios";
 
 function SCartCard({item}) {
   const [monument,setMonument] = useState({})
+  const [adultcount,setadultcount]=useState(0);
   useEffect(()=>{
     const getMonument = async ()=>{
       const helloMonument = (await axios.get(`http://localhost:8000/api/monument/${item.monumentId}`)).data;
