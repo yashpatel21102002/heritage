@@ -1,10 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import StripeCheckout from "react-stripe-checkout";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const KEY = process.env.REACT_STRIPE_KEY;
+const KEY =
+  "pk_test_51NDTd8SCEbCeAi26HCHQo52T6NP1UXpvwgaJ5vPcYxVmGgHZ6LqwPYoGaxbXxgUc77RVTIm3X3p0W30IN7C6PTGR001eB3ZpTv";
+
+
+
 
 const YCartTotal = () => {
+
+  const navigate = useNavigate();
+
+  const onToken = async (token) => {
+    try {
+      // Make a request to your backend server to process the payment
+      // console.log(token.id);
+      const response = await axios.post("http://localhost:8000/api/payment", {
+        token: token.id,
+        amount: 5300, // Amount in cents
+      });
+
+      // Handle the success response
+      
+      // console.log(response);
+
+      // Redirect to the success page
+      navigate("/success");
+    } catch (error) {
+      // Handle the error
+      console.error(error);
+    }
+  };
   return (
     <Container>
       <Wrapper1>
@@ -33,10 +62,11 @@ const YCartTotal = () => {
             // {/* image="https://avatars.githubusercontent.com/u/1486366?v=4" */}
             // {/* billingAddress shippingAddress description= */}
             // {/* {`Your total is $ ${cart.total}`} */}
-            // {/* amount={cart.total * 100} */}
-            // {/* token={onToken} */}
+            amount={5300 * 100}
+            token={onToken}
             stripeKey={KEY}
-            >
+            currency="INR"
+          >
             <Button>Checkout</Button>
           </StripeCheckout>
         </Items>

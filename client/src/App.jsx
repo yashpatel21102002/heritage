@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Monument from './pages/Monument'
+import Success from './pages/Success'
 
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
         <Route path="/login" exact  element={<Login/>}/>
         <Route path="/register" exact element={<Register/>}/>
         <Route path="/monument/:id" exact element={<Monument/>}/>
-       
+        <Route path="/success" exact element={<Success/>}/>
 
       </Routes>
 
