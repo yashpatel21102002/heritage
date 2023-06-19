@@ -46,6 +46,9 @@ function Single(props) {
 
   },[1])
 
+  // token + monumentid 
+  
+
 
   async function handleMonument() {
     const token = localStorage.getItem('token');
@@ -58,16 +61,25 @@ function Single(props) {
       
     }
     
-    console.log(data.token)
+
+    
+    const check = await axios.get(`http://localhost:8000/api/ticket/${data.token}/${id}`)
+    
+    if(!check.data){
+
+      const PostMonument = await axios.post(
+        "http://localhost:8000/api/ticket",data
+        );
+        setfreq(freq+1)
+    }
+    else{
+      alert("Please check the Cart edit there and purchase your ticket")
+    }
+
     
     
-    
-    const PostMonument = await axios.post(
-      "http://localhost:8000/api/ticket",data
-      );
       
       
-      setfreq(freq+1)
 
   }
   

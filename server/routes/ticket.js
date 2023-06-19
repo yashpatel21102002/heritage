@@ -31,7 +31,7 @@ router.post("/ticket",verifyToken,async(req,res)=>{
 router.get("/ticket/:token",verifyGetRequest,async (req, res) => {
     const ttoken = req.params.token
     const token = JSON.parse(ttoken)
-    console.log(token)
+    // console.log(token)
     const decode_email = await jwt.decode(token).email;
     console.log(decode_email,token)
     try{
@@ -49,6 +49,30 @@ router.get("/ticket/:token",verifyGetRequest,async (req, res) => {
     
 })
 
+router.get("/ticket/:token/:monumentId" , async(req,res)=>{
+
+    const token =  req.params.token;
+    const decode_email = await jwt.decode(token).email;
+    const monumentId = req.params.monumentId
+    try{
+        const arr = await Ticket.find({
+            userEmail:{
+                $in:[decode_email],
+            },
+            monumentId:{
+                $in:[monumentId],
+            }
+        })
+        if(arr.length > 0){
+            res.status(200).json(true)
+        }
+        else{
+            res.status(200).json(false)
+        }
+    }catch(e){
+        return res.status(500).json(e)
+    }
+})
 
 
 router.delete("/ticket/:id",verifyToken, async (req, res) => {
