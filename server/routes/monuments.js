@@ -13,6 +13,7 @@ router.post("/monument",async(req,res)=>{
 
     }catch(e){
         res.status(500).json(e);
+        console.log(e);
     }
 })
 

@@ -1,9 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const YMonument = ({item}) => {
+const YMonument = ({ item }) => {
+    
+    const handleClick = () => {
+      window.location.href = `/monument/${item._id}`;
+    };
+    
   return (
-    <Container>
+    <Container onClick={handleClick}>
         <Image src={`${item.img[0]}`}/>
         <Info>
             <Title>{item.name}</Title>

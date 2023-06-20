@@ -130,7 +130,7 @@ const Items = styled.ul`
     
     display: flex;
     list-style: none;
-    
+    cursor: pointer;
 
 `
 

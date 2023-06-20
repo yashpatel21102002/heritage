@@ -106,6 +106,9 @@ const Middle = () => {
         
     }
    
+    const handleMonuments = () => {
+      window.location.href = "/monuments";
+    };
 
   return (
     <Container>
@@ -121,7 +124,7 @@ const Middle = () => {
                         }
                         } value={searchTerm}/>
                     <Button onClick={handleSearch}>Search</Button>
-                    <Button>Explore</Button>
+                    <Button onClick={handleMonuments}>Explore</Button>
                 </Box>
             </SearchArea>
             <Result>
@@ -254,8 +257,7 @@ const Button = styled.button`
    background-color: black;
    color: white;
    border: none;
-
-
+   cursor: pointer;
 `
 
 const Result = styled.div`

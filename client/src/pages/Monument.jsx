@@ -23,7 +23,7 @@ function Single(props) {
   const id = location.pathname.split("/")[2];
  
   const handleSidePanel = ()=>{
-    document.getElementById('sidepanel').style.width = "45vw"
+    document.getElementById('sidepanel').style.width = "50vw"
     
   }
 
@@ -55,13 +55,10 @@ function Single(props) {
     
     var data = {
       monumentId : id,
-      token:JSON.parse(token)
-      
-      
-      
+      token:JSON.parse(token)    
     }
     
-
+    console.log(token);
     
     const check = await axios.get(`http://localhost:8000/api/ticket/${data.token}/${id}`)
     
@@ -74,12 +71,7 @@ function Single(props) {
     }
     else{
       alert("Please check the Cart edit there and purchase your ticket")
-    }
-
-    
-    
-      
-      
+    }   
 
   }
   
@@ -100,7 +92,7 @@ function Single(props) {
         <HeaderInfo>
           <SideButton onClick={handleSidePanel}>Open</SideButton>
           <SidePanel id="sidepanel">
-            <CloseButton onClick={CloseSidePanel}>×Close</CloseButton>
+            <CloseButton onClick={CloseSidePanel}>× Close</CloseButton>
              {/* from here you can make any container and make one new card named as CartMonument or anything and map it here and make one or two buttons that can lead use to cart and checkout page  */}
 
             <SCartCards tickets={tickets} freq={freq}/>
@@ -250,10 +242,7 @@ const SidePanel = styled.div`
   height: auto;
   position: fixed;  //Stay in place
   z-index: 2; /* Stay on top */
-  /* top: 0; */
-  /* left: 0; */
   background-color: black;
-  /* opacity: 0.8; */
   overflow-x: hidden; //Disable horizontal scroll
   /* padding-top: 60px; Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the 

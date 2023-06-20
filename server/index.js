@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import monumentRouter from './routes/monuments.js'
 import userRouter from './routes/auth.js'
 import ticketRouter from './routes/ticket.js'
+import stripeRouter from './routes/stripe.js'
+import orderRouter from './routes/order.js'
 
 
 const app = express();
@@ -18,7 +20,9 @@ app.use(express.json());
 dotenv.config();
 app.use("/api",monumentRouter);
 app.use("/api",userRouter)
-app.use("/api",ticketRouter)
+app.use("/api", ticketRouter)
+app.use("/api", stripeRouter);
+app.use("/api", orderRouter);
 
 
 mongoose.connect(process.env.MONGO_URI,{

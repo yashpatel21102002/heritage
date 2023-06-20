@@ -1,14 +1,19 @@
 import mongoose from 'mongoose'
 
-const ticketSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
+
+    ticketId: {
+        type: String,
+        // required:true,
+    },
+
     userEmail : {
         type:String,    
-        required:true,
+        // required:true,
     },
     monumentId: {
         type:String,
-       
-        required:true,
+        // required:true,
     },
    
             adults:{
@@ -39,7 +44,7 @@ const ticketSchema = new mongoose.Schema({
         type: String,
         default:""
     }
-},{timestamps:true},{collection:"TicketInfo"})
+},{timestamps:true},{collection:"OrderInfo"})
 
-const Ticket = mongoose.model("Ticket",ticketSchema);
-export default Ticket;
+const Order = mongoose.model("Order",orderSchema);
+export default Order;

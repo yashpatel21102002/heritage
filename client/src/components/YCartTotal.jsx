@@ -1,36 +1,103 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import StripeCheckout from "react-stripe-checkout";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+const KEY =
+  "pk_test_51NDTd8SCEbCeAi26HCHQo52T6NP1UXpvwgaJ5vPcYxVmGgHZ6LqwPYoGaxbXxgUc77RVTIm3X3p0W30IN7C6PTGR001eB3ZpTv";
 
 const YCartTotal = () => {
+
+  const navigate = useNavigate();
+
+
+  const [grandTotal, setGrandTotal] = useState(0);
+
+  useEffect(() => {
+    const fetchTickets = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const ttoken = JSON.parse(token);
+
+        const response = await axios.get(
+          `http://localhost:8000/api/ticket/${ttoken}`
+        );
+        const tickets = response.data;
+        let total = 0;
+        tickets.forEach((ticket) => {
+          total += ticket.total;
+        });
+        setGrandTotal(total);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTickets();
+  }, []);
+
+
+
+  const onToken = async (token) => {
+    try {
+      // Make a request to your backend server to process the payment
+      // console.log(token.id);
+      const response = await axios.post("http://localhost:8000/api/payment", {
+        token: token.id,
+        amount: grandTotal*100, // Amount in cents
+      });
+
+      // Handle the success response
+      
+      // console.log(response);
+
+      // Redirect to the success page
+      navigate("/success", { state: { fromCheckout: true } });
+    } catch (error) {
+      // Handle the error
+      console.error(error);
+    }
+  };
   return (
     <Container>
       <Wrapper1>
-        <Items style={{justifyContent:'center'}}>
-          <Item><b>1. </b>Payment is not refundable</Item>
-          
-          <Item><b>2. </b>Please choose the date valid date</Item>
-          <Item><b>3. </b>Once paid pdf of ticket will be sent!</Item>
-         
-         
-          
-        </Items>
+        <Items style={{ justifyContent: "center" }}>
+          <Item>
+            <b>1. </b>Payment is not refundable
+          </Item>
 
+          <Item>
+            <b>2. </b>Please choose the date valid date
+          </Item>
+          <Item>
+            <b>3. </b>Once paid pdf of ticket will be sent!
+          </Item>
+        </Items>
       </Wrapper1>
       <Wrapper2>
-        <Items style={{alignItems:'center',gap:'3px'}}>
+        <Items style={{ alignItems: "center", gap: "3px" }}>
           <Item>Total : 5000</Item>
-         
-          <Item>Extra : 200</Item>
-          <Item>Grand Total : 5300</Item>
-          <Button>Checkout</Button>
-          
-        
-        </Items>
-        
 
+          <Item>Extra : 200</Item>
+          <Item>Grand Total : { grandTotal}</Item>
+
+          <StripeCheckout
+            // {/* name="Lama Shop" */}
+            // {/* image="https://avatars.githubusercontent.com/u/1486366?v=4" */}
+            // {/* billingAddress shippingAddress description= */}
+            // {/* {`Your total is $ ${cart.total}`} */}
+            amount={grandTotal*100}
+            token={onToken}
+            stripeKey={KEY}
+            currency="INR"
+          >
+            <Button>Checkout</Button>
+          </StripeCheckout>
+        </Items>
       </Wrapper2>
     </Container>
-  )
+  );
 }
 
 export default YCartTotal
