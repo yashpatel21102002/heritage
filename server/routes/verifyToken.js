@@ -19,8 +19,8 @@ const verifyToken = (req, res, next) => {
 };
 
 const verifyGetRequest = (req,res,next) => {
-    const authHeader_dup = req.params.token;
-    const authHeader = JSON.parse(authHeader_dup);
+    const authHeader = req.params.token;
+    // const authHeader = JSON.parse(authHeader_dup);
     if(authHeader){
         const token = authHeader;
         jwt.verify(token,process.env.JWT_SECRET,(err,user)=>{
@@ -30,6 +30,7 @@ const verifyGetRequest = (req,res,next) => {
         })
     }else{
         console.log("ok i am very dangourous error")
+        
         return res.status(401).json("you are not authenticated!")
     }
 }

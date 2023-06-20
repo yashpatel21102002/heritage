@@ -1,9 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const YCard = ({item}) => {
+const YCard = ({ item }) => {
+    
+    const handleClick = () => {
+      window.location.href = `/monument/${item._id}`;
+    };
   return (
-    <Container>
+    <Container onClick={handleClick}>
         
         <Imgdv src={item.img[0]}>
         

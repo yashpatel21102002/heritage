@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import StripeCheckout from "react-stripe-checkout";
 import axios from 'axios';
@@ -7,12 +7,37 @@ import { useNavigate } from 'react-router-dom';
 const KEY =
   "pk_test_51NDTd8SCEbCeAi26HCHQo52T6NP1UXpvwgaJ5vPcYxVmGgHZ6LqwPYoGaxbXxgUc77RVTIm3X3p0W30IN7C6PTGR001eB3ZpTv";
 
-
-
-
 const YCartTotal = () => {
 
   const navigate = useNavigate();
+
+
+  const [grandTotal, setGrandTotal] = useState(0);
+
+  useEffect(() => {
+    const fetchTickets = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const ttoken = JSON.parse(token);
+
+        const response = await axios.get(
+          `http://localhost:8000/api/ticket/${ttoken}`
+        );
+        const tickets = response.data;
+        let total = 0;
+        tickets.forEach((ticket) => {
+          total += ticket.total;
+        });
+        setGrandTotal(total);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTickets();
+  }, []);
+
+
 
   const onToken = async (token) => {
     try {
@@ -20,7 +45,7 @@ const YCartTotal = () => {
       // console.log(token.id);
       const response = await axios.post("http://localhost:8000/api/payment", {
         token: token.id,
-        amount: 5300, // Amount in cents
+        amount: grandTotal*100, // Amount in cents
       });
 
       // Handle the success response
@@ -28,7 +53,7 @@ const YCartTotal = () => {
       // console.log(response);
 
       // Redirect to the success page
-      navigate("/success");
+      navigate("/success", { state: { fromCheckout: true } });
     } catch (error) {
       // Handle the error
       console.error(error);
@@ -55,14 +80,14 @@ const YCartTotal = () => {
           <Item>Total : 5000</Item>
 
           <Item>Extra : 200</Item>
-          <Item>Grand Total : 5300</Item>
+          <Item>Grand Total : { grandTotal}</Item>
 
           <StripeCheckout
             // {/* name="Lama Shop" */}
             // {/* image="https://avatars.githubusercontent.com/u/1486366?v=4" */}
             // {/* billingAddress shippingAddress description= */}
             // {/* {`Your total is $ ${cart.total}`} */}
-            amount={5300 * 100}
+            amount={grandTotal*100}
             token={onToken}
             stripeKey={KEY}
             currency="INR"

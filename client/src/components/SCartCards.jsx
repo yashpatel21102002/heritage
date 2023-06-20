@@ -10,9 +10,10 @@ const SCartCards = ({freq}) => {
 
     const getTicket = async()=>{
       const token = localStorage.getItem('token')
+      const ttoken=JSON.parse(token)
     
       
-      const res  =  await axios.get(`http://localhost:8000/api/ticket/${token}`);
+      const res  =  await axios.get(`http://localhost:8000/api/ticket/${ttoken}`);
       console.log(res.data)
       setTickets(res.data)
     }

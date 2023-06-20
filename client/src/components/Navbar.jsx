@@ -7,6 +7,11 @@ import {SiYourtraveldottv} from 'react-icons/si'
 import {CiCircleMore} from 'react-icons/ci'
 
 const Navbar = () => {
+
+     const handleMonuments = () => {
+       window.location.href = "/monuments";
+    };
+    
   return (
         <Container>
             <Header>
@@ -14,7 +19,7 @@ const Navbar = () => {
             </Header>
             <Header2>
                 <Items>
-                    <Item><Icon><MdFort size="25px"/></Icon><Span>Monuments</Span></Item>
+                    <Item onClick={handleMonuments}><Icon><MdFort size="25px"/></Icon><Span>Monuments</Span></Item>
                     <Item><Icon><GrServices size="25px"/></Icon><Span>Services</Span></Item>
                     <Item><Icon><MdLocalOffer size="25px"/></Icon><Span>Offers</Span></Item>
                     <Item><Icon><SiYourtraveldottv size="25px"/></Icon><Span>Travelling</Span></Item>
@@ -71,7 +76,7 @@ const Items = styled.ul`
     
     display: flex;
     list-style: none;
-    
+    cursor: pointer;
 
 `
 
