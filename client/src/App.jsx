@@ -6,7 +6,13 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Monument from './pages/Monument'
+
 import Success from './pages/Success'
+
+
+import Admin from './pages/Admin'
+import AdminPanel from './pages/AdminPanel'
+// import Order from './pages/Order'
 
 
 
@@ -19,7 +25,13 @@ const App = () => {
         <Route path="/login" exact  element={<Login/>}/>
         <Route path="/register" exact element={<Register/>}/>
         <Route path="/monument/:id" exact element={<Monument/>}/>
+
         <Route path="/success" exact element={<Success/>}/>
+
+        <Route path="/admin" exact element={<Admin/>}/>
+        <Route path="/adminPanel/:monumentId" exact element={<AdminPanel/>}/>
+        {/* <Route path="/order" exact element={<Order/>}/> */}
+
 
       </Routes>
 
