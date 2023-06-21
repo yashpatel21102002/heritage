@@ -10,6 +10,14 @@ const ticketSchema = new mongoose.Schema({
        
         required:true,
     },
+    monumentName:{
+        type:String,
+        
+    },
+    monumentState:{
+        type:String,
+        
+    },
    
             adults:{
                 type:Number,

@@ -52,10 +52,14 @@ function Single(props) {
 
   async function handleMonument() {
     const token = localStorage.getItem('token');
+
+  
     
     var data = {
       monumentId : id,
-      token:JSON.parse(token)    
+      token:JSON.parse(token) ,
+      monumentName:monument?.name,   
+      monumentState:monument?.state,
     }
     
     console.log(token);
@@ -68,6 +72,7 @@ function Single(props) {
         "http://localhost:8000/api/ticket",data
         );
         setfreq(freq+1)
+        document.getElementById('sidepanel').style.width = "50vw"
     }
     else{
       alert("Please check the Cart edit there and purchase your ticket")

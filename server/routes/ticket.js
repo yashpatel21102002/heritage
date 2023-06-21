@@ -11,6 +11,8 @@ router.post("/ticket",async(req,res)=>{
     const token = req.body.token;
     
     const data = req.body.monumentId;
+    const name = req.body.monumentName;
+    const state = req.body.monumentState
     console.log(token,data)
    
     const decode_email = await jwt.decode(token).email;
@@ -19,7 +21,7 @@ router.post("/ticket",async(req,res)=>{
   
     // const monumentId = req.body.data.monumentId;
     console.log(decode_email)
-    const newTicket = new Ticket({userEmail:decode_email,monumentId:data});
+    const newTicket = new Ticket({userEmail:decode_email,monumentId:data,monumentName:name,monumentState:state});
     console.log(newTicket)
     try{
         const savedTicket = await newTicket.save()
@@ -33,9 +35,9 @@ router.post("/ticket",async(req,res)=>{
 router.get("/ticket/:token",verifyGetRequest,async (req, res) => {
     // const ttoken = req.params.token
     const token = req.params.token
-    console.log(token)
+    // console.log(token)
     const decode_email = await jwt.decode(token).email;
-    console.log(decode_email,token)
+    // console.log(decode_email,token)
     try{
         const OutputTickets = await Ticket.find({
             userEmail:{
@@ -77,15 +79,21 @@ router.get("/ticket/:token/:monumentId" , async(req,res)=>{
 })
 
 
-router.delete("/ticket/:id",verifyToken, async (req, res) => {
-    const id = req.params.id;
+router.delete("/ticket/:token",verifyGetRequest, async (req, res) => {
+    const token = req.params.token
+    const email_id = jwt.decode(token).email
+    console.log(token)
 
     try{
-        await Ticket.findByIdAndDelete(id);
+        await Ticket.deleteMany({
+            userEmail:{
+                $in:[email_id]
+            }
+        });
         res.status(200).json("Monument has been deleted!!")
 
     }catch(e){
-        res.status(500).json(e);
+        res.status(500).json(e.message);
     }
 })
 

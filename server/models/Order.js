@@ -2,10 +2,7 @@ import mongoose from 'mongoose'
 
 const orderSchema = new mongoose.Schema({
 
-    ticketId: {
-        type: String,
-        // required:true,
-    },
+    
 
     userEmail : {
         type:String,    
@@ -15,6 +12,17 @@ const orderSchema = new mongoose.Schema({
         type:String,
         // required:true,
     },
+    monumentName:{
+        type:String,
+    },
+    monumentState:{
+        type:String,
+    },
+    uniqueId:{
+        type:String,
+        unique:true,
+    },
+   
    
             adults:{
                 type:Number,
